@@ -33,6 +33,16 @@ protected $color;
 protected $createdAt;
 
     /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="createdCategories")
+     */
+    protected $createdBy;
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="category")
+     */
+    protected $tasks;
+
+
+    /**
      * Get id
      *
      * @return integer 

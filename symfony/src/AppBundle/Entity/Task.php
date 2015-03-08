@@ -54,6 +54,18 @@ protected $priority;
 protected $createdBy;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
+     */
+    protected $assignee;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
+     * @ORM\JoinColumn(nullable=True)
+     */
+    protected $category;
+
+
 
     /**
      * Get id

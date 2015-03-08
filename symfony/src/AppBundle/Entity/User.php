@@ -44,6 +44,17 @@ protected $createdAt;
 protected $createdTasks;
 
     /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="asignee")
+     */
+protected $assignedTasks;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="createdBy")
+     */
+    protected $createdCategories;
+
+
+    /**
      * Get id
      *
      * @return integer 
