@@ -43,15 +43,15 @@ protected $createdAt;
  */
 protected $createdTasks;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="asignee")
-     */
+/**
+ * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
+ */
 protected $assignedTasks;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="createdBy")
-     */
-    protected $createdCategories;
+/**
+ * @ORM\ManyToOne(targetEntity="Category", inversedBy="createdBy")
+ */
+protected $createdCategories;
 
 
     /**
