@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class TaskController extends Controller
 {
     /**
-     * @Route("/app/list", name="task")
+     * @Route("/app/tasks", name="task")
      */
 
     public function indexAction()

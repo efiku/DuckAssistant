@@ -6,12 +6,9 @@
             {% for Task in tasks %}
             <li>{{ Task.id }}</li>
             <li>{{ Task.content }}</li>
-            <li>{{ Task.data }}</li>
-            <li>{{ Task.dueDate }}</li>
             <li>{{ Task.done }}</li>
-            <li>{{ Task.createAt }}</li>
-            <li>{{ Task.priority }}</li>
-            <li>{{ Task.createdBy }}</li>
+
+
         {% endfor %}
     </ul>
 {% endblock %}
