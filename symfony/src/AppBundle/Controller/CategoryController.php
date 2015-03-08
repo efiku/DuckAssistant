@@ -2,9 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Task;
+use AppBundle\Forms\CategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class CategoryController extends Controller
@@ -34,7 +38,19 @@ class CategoryController extends Controller
     /**
      * @Route("/app/edit/{id}", name="editCategory")
      */
-    public function editAction() {}
+    public function editAction( Category $category, Request $request ) {
+
+         $form = $this->createForm( new CategoryType(), $category);
+        if($form->handleRequest($request)->isValid()){
+          $entityMenager = $this->getDoctrine()->getManager();
+         $entityMenager->flush();
+        }
+        return $this->render('categories/editList.html.twig',
+            array(
+                'form' => $form->createView()
+            )
+        );
+    }
 
 
 }
