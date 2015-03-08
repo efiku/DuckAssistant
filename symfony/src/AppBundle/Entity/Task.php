@@ -238,6 +238,7 @@ protected $createdBy;
         return $this->createdBy;
     }
 
+<<<<<<< HEAD
     /**
      * Set assignee
      *
@@ -282,5 +283,10 @@ protected $createdBy;
     public function getCategory()
     {
         return $this->category;
+=======
+    public function __construct(){
+        $this->setCreateAt( new \DateTime() );
+
+>>>>>>> origin/master
     }
 }
