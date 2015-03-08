@@ -237,4 +237,9 @@ protected $createdBy;
     {
         return $this->createdBy;
     }
+
+    public function __construct(){
+        $this->setCreateAt( new \DateTime() );
+
+    }
 }
