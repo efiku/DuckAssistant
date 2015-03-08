@@ -196,4 +196,60 @@ protected $assignedTasks;
     {
         return $this->createdTasks;
     }
+
+    /**
+     * Add assignedTasks
+     *
+     * @param \AppBundle\Entity\Task $assignedTasks
+     * @return User
+     */
+    public function addAssignedTask(\AppBundle\Entity\Task $assignedTasks)
+    {
+        $this->assignedTasks[] = $assignedTasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove assignedTasks
+     *
+     * @param \AppBundle\Entity\Task $assignedTasks
+     */
+    public function removeAssignedTask(\AppBundle\Entity\Task $assignedTasks)
+    {
+        $this->assignedTasks->removeElement($assignedTasks);
+    }
+
+    /**
+     * Get assignedTasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAssignedTasks()
+    {
+        return $this->assignedTasks;
+    }
+
+    /**
+     * Set createdCategories
+     *
+     * @param \AppBundle\Entity\Category $createdCategories
+     * @return User
+     */
+    public function setCreatedCategories(\AppBundle\Entity\Category $createdCategories = null)
+    {
+        $this->createdCategories = $createdCategories;
+
+        return $this;
+    }
+
+    /**
+     * Get createdCategories
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getCreatedCategories()
+    {
+        return $this->createdCategories;
+    }
 }

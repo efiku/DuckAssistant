@@ -120,4 +120,78 @@ protected $createdAt;
     {
         return $this->createdAt;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdBy = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add createdBy
+     *
+     * @param \AppBundle\Entity\User $createdBy
+     * @return Category
+     */
+    public function addCreatedBy(\AppBundle\Entity\User $createdBy)
+    {
+        $this->createdBy[] = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdBy
+     *
+     * @param \AppBundle\Entity\User $createdBy
+     */
+    public function removeCreatedBy(\AppBundle\Entity\User $createdBy)
+    {
+        $this->createdBy->removeElement($createdBy);
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param \AppBundle\Entity\Task $tasks
+     * @return Category
+     */
+    public function addTask(\AppBundle\Entity\Task $tasks)
+    {
+        $this->tasks[] = $tasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \AppBundle\Entity\Task $tasks
+     */
+    public function removeTask(\AppBundle\Entity\Task $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
 }
