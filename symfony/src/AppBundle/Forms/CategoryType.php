@@ -16,7 +16,7 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('color');
+            ->add('color', 'choice', array('choices' => array('black' => 'black', 'red' => 'red', 'green' => 'green')));
     }
 
     public function getName()

@@ -41,9 +41,11 @@ class CategoryController extends Controller
     public function editAction( Category $category, Request $request ) {
 
          $form = $this->createForm( new CategoryType(), $category);
-        if($form->handleRequest($request)->isValid()){
+        if($form->handleRequest($request)->isValid())
+        {
           $entityMenager = $this->getDoctrine()->getManager();
          $entityMenager->flush();
+            return $this->redirectToRoute('listCategory');
         }
         return $this->render('categories/editList.html.twig',
             array(
