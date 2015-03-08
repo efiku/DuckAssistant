@@ -49,9 +49,9 @@ protected $createAt;
 protected $priority;
 
 /**
- * @ORM\OneToMany(targetEntity="User", mappedBy="createdBy")
+ * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
  */
-protected $user;
+protected $createdBy;
 
     /**
      * Get id
@@ -199,5 +199,28 @@ protected $user;
     public function getPriority()
     {
         return $this->priority;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \AppBundle\Entity\User $createdBy
+     * @return Task
+     */
+    public function setCreatedBy(\AppBundle\Entity\User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }

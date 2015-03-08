@@ -39,9 +39,9 @@ protected $createdAt;
 
 
 /**
- * @ORM\OneToMany(targetEntity="Task", mappedBy="createdTasks")
+ * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
  */
-protected $task;
+protected $createdTasks;
 
     /**
      * Get id
@@ -144,5 +144,45 @@ protected $task;
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdTasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add createdTasks
+     *
+     * @param \AppBundle\Entity\Task $createdTasks
+     * @return User
+     */
+    public function addCreatedTask(\AppBundle\Entity\Task $createdTasks)
+    {
+        $this->createdTasks[] = $createdTasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdTasks
+     *
+     * @param \AppBundle\Entity\Task $createdTasks
+     */
+    public function removeCreatedTask(\AppBundle\Entity\Task $createdTasks)
+    {
+        $this->createdTasks->removeElement($createdTasks);
+    }
+
+    /**
+     * Get createdTasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCreatedTasks()
+    {
+        return $this->createdTasks;
     }
 }
