@@ -33,7 +33,24 @@ class CategoryController extends Controller
     /**
      * @Route("/app/add", name="addCategory")
      */
-    public function addAction(){}
+    public function addAction( Request $request){
+        $category = new Category();
+        $form = $this->createForm( new CategoryType(), $category);
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $entityMenager = $this->getDoctrine()->getManager();
+            $entityMenager->persist($category);
+            $entityMenager->flush();
+            return $this->redirectToRoute('listCategory');
+        }
+
+
+        return $this->render('categories/addList.html.twig', array(
+            'form' => $form->createView()
+
+        ));
+    }
 
     /**
      * @Route("/app/edit/{id}", name="editCategory")
@@ -43,7 +60,7 @@ class CategoryController extends Controller
          $form = $this->createForm( new CategoryType(), $category);
         if($form->handleRequest($request)->isValid())
         {
-          $entityMenager = $this->getDoctrine()->getManager();
+         $entityMenager = $this->getDoctrine()->getManager();
          $entityMenager->flush();
             return $this->redirectToRoute('listCategory');
         }

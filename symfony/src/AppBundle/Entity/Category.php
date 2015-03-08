@@ -127,6 +127,7 @@ protected $createdAt;
     {
         $this->createdBy = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setCreatedAt(new \Datetime() );
     }
 
     /**
