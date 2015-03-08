@@ -48,6 +48,11 @@ protected $createAt;
  */
 protected $priority;
 
+/**
+ * @ORM\OneToMany(targetEntity="User", mappedBy="createdBy")
+ */
+protected $user;
+
     /**
      * Get id
      *

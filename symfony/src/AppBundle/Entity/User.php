@@ -37,6 +37,12 @@ protected $name;
 */
 protected $createdAt;
 
+
+/**
+ * @ORM\OneToMany(targetEntity="Task", mappedBy="createdTasks")
+ */
+protected $task;
+
     /**
      * Get id
      *
