@@ -1,38 +1,30 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace  Duck\AssistantBundle\Controller;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Task;
-use AppBundle\Forms\CategoryType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Duck\AssistantBundle\Entity\Category;
+use Duck\AssistantBundle\Forms\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class CategoryController extends Controller
 {
-    /**
-     * @Route("/app/list", name="listCategory")
-     */
+  /* Main Route / for prefix /cat */
     public function indexAction()
     {
         $EN = $this->getDoctrine()->getManager();
 
-        $repo = $EN->getRepository('AppBundle:Category');
+        $repo = $EN->getRepository('DuckAssistantBundle:Category');
 
         $categories = $repo->findAll();
 
 
-        return $this->render('categories/index.html.twig', array(
+        return $this->render('DuckAssistantBundle:categories:index.html.twig', array(
             'categories' =>  $categories
         ));
     }
 
-    /**
-     * @Route("/app/add", name="addCategory")
-     */
+    /* Route /add for prefix /cat */
     public function addAction( Request $request){
         $category = new Category();
         $form = $this->createForm( new CategoryType(), $category);
@@ -46,15 +38,13 @@ class CategoryController extends Controller
         }
 
 
-        return $this->render('categories/addList.html.twig', array(
+        return $this->render('DuckAssistantBundle:categories:category_mod.html.twig', array(
             'form' => $form->createView()
 
         ));
     }
 
-    /**
-     * @Route("/app/edit/{id}", name="editCategory")
-     */
+    /* Route /edit/id for prefix /cat */
     public function editAction( Category $category, Request $request ) {
 
          $form = $this->createForm( new CategoryType(), $category);
@@ -64,12 +54,14 @@ class CategoryController extends Controller
          $entityMenager->flush();
             return $this->redirectToRoute('listCategory');
         }
-        return $this->render('categories/editList.html.twig',
+        return $this->render('DuckAssistantBundle:categories:category_mod.html.twig',
             array(
                 'form' => $form->createView()
             )
         );
     }
 
+
+    //TODO: Delete category
 
 }

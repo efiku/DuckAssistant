@@ -5,7 +5,7 @@
  * Date: 2015-03-08
  * Time: 14:33
  */
-namespace AppBundle\Forms;
+namespace Duck\AssistantBundle\Forms;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

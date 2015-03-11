@@ -1,0 +1,19 @@
+#
+# This file contains all routers for prefix /cat
+# e.g. /cat/add , /cat/edit/{id}
+#
+duck_assistantBundle_cat_Lists:
+    path:     /
+    defaults: { _controller: DuckAssistantBundle:Category:index }
+
+duck_assistantBundle_cat_add:
+    path:     /add
+    defaults: { _controller: DuckAssistantBundle:Category:add }
+
+duck_assistantBundle_cat_edit:
+    path:     /edit/{id}
+    defaults: { _controller: DuckAssistantBundle:Category:edit }
+
+duck_assistantBundle_cat_delete:
+    path:     /del/{id}
+    defaults: { _controller: DuckAssistantBundle:Category:del }

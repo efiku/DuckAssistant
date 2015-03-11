@@ -9,5 +9,5 @@
 /symfony/build/
 /symfony/vendor/
 /symfony/bin/
-composer.phar
+/symfony/composer.phar
 .idea/
