@@ -1,3 +1,15 @@
-app:
-    resource: @AppBundle/Controller/
-    type:     annotation
+duck_assistant:
+    resource: "@DuckAssistantBundle/Resources/config/main.yml"
+    prefix:   /
+
+duck_assistant_categories:
+    resource: "@DuckAssistantBundle/Resources/config/cat.yml"
+    prefix:   /cat
+
+duck_assistant_users:
+    resource: "@DuckAssistantBundle/Resources/config/user.yml"
+    prefix:   /user
+
+duck_assistant_tasks:
+    resource: "@DuckAssistantBundle/Resources/config/task.yml"
+    prefix:   /task

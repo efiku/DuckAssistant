@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Categories Lists</h1>
+    <ul>
+            {% for Category in categories %}
+            <li>{{ Category.name }} - <strong style="color: {{ Category.color }}">{{ Category.color }}</strong></li>
+            {% endfor %}
+    </ul>
+{% endblock %}

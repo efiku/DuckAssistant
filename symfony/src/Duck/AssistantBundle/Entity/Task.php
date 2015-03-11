@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Entity;
+namespace  Duck\AssistantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -218,10 +218,10 @@ protected $category;
     /**
      * Set createdBy
      *
-     * @param \AppBundle\Entity\User $createdBy
+     * @param \Duck\AssistantBundle\User $createdBy
      * @return Task
      */
-    public function setCreatedBy(\AppBundle\Entity\User $createdBy = null)
+    public function setCreatedBy(\Duck\AssistantBundle\User $createdBy = null)
     {
         $this->createdBy = $createdBy;
 
@@ -231,7 +231,7 @@ protected $category;
     /**
      * Get createdBy
      *
-     * @return \AppBundle\Entity\User 
+     * @return \Duck\AssistantBundle\User 
      */
     public function getCreatedBy()
     {
@@ -242,10 +242,10 @@ protected $category;
     /**
      * Set assignee
      *
-     * @param \AppBundle\Entity\User $assignee
+     * @param \Duck\AssistantBundle\User $assignee
      * @return Task
      */
-    public function setAssignee(\AppBundle\Entity\User $assignee = null)
+    public function setAssignee(\Duck\AssistantBundle\User $assignee = null)
     {
         $this->assignee = $assignee;
 
@@ -255,7 +255,7 @@ protected $category;
     /**
      * Get assignee
      *
-     * @return \AppBundle\Entity\User 
+     * @return \Duck\AssistantBundle\User 
      */
     public function getAssignee()
     {
@@ -265,10 +265,10 @@ protected $category;
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param \Duck\AssistantBundle\Category $category
      * @return Task
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function setCategory(\Duck\AssistantBundle\Category $category = null)
     {
         $this->category = $category;
 
@@ -278,12 +278,14 @@ protected $category;
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category 
+     * @return \Duck\AssistantBundle\Category 
      */
     public function getCategory()
     {
         return $this->category;
     }
+
+
     public function __construct(){
         $this->setCreateAt( new \DateTime() );
 

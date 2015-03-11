@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace Duck\AssistantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -133,10 +133,10 @@ protected $createdAt;
     /**
      * Add createdBy
      *
-     * @param \AppBundle\Entity\User $createdBy
+     * @param \Duck\AssistantBundle\User $createdBy
      * @return Category
      */
-    public function addCreatedBy(\AppBundle\Entity\User $createdBy)
+    public function addCreatedBy(\Duck\AssistantBundle\User $createdBy)
     {
         $this->createdBy[] = $createdBy;
 
@@ -146,9 +146,9 @@ protected $createdAt;
     /**
      * Remove createdBy
      *
-     * @param \AppBundle\Entity\User $createdBy
+     * @param \Duck\AssistantBundle\User $createdBy
      */
-    public function removeCreatedBy(\AppBundle\Entity\User $createdBy)
+    public function removeCreatedBy(\Duck\AssistantBundle\User $createdBy)
     {
         $this->createdBy->removeElement($createdBy);
     }
@@ -166,10 +166,10 @@ protected $createdAt;
     /**
      * Add tasks
      *
-     * @param \AppBundle\Entity\Task $tasks
+     * @param \Duck\AssistantBundle\Task $tasks
      * @return Category
      */
-    public function addTask(\AppBundle\Entity\Task $tasks)
+    public function addTask(\Duck\AssistantBundle\Task $tasks)
     {
         $this->tasks[] = $tasks;
 
@@ -179,9 +179,9 @@ protected $createdAt;
     /**
      * Remove tasks
      *
-     * @param \AppBundle\Entity\Task $tasks
+     * @param \Duck\AssistantBundle\Task
      */
-    public function removeTask(\AppBundle\Entity\Task $tasks)
+    public function removeTask(\Duck\AssistantBundle\Task $tasks)
     {
         $this->tasks->removeElement($tasks);
     }

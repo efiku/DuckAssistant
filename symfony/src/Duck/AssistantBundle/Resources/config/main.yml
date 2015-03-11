@@ -1,0 +1,3 @@
+duck_assistant_homepage:
+    path:     /
+    defaults: { _controller: DuckAssistantBundle:Welcome:index }

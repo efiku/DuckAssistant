@@ -1,0 +1,19 @@
+#
+# This file contains all routers for prefix /task
+# e.g. /task/add , /task/edit/{id}
+#
+duck_assistantBundle_task_Lists:
+    path:     /
+    defaults: { _controller: DuckAssistantBundle:Task:index }
+
+duck_assistantBundle_task_add:
+    path:     /add
+    defaults: { _controller: DuckAssistantBundle:Task:add }
+
+duck_assistantBundle_task_edit:
+    path:     /edit/{id}
+    defaults: { _controller: DuckAssistantBundle:Task:edit }
+
+duck_assistantBundle_task_delete:
+    path:     /del/{id}
+    defaults: { _controller: DuckAssistantBundle:Task:del }

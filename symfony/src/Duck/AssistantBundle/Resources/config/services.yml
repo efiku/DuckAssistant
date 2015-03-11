@@ -1,0 +1,4 @@
+services:
+#    duck_assistant.example:
+#        class: Duck\AssistantBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
