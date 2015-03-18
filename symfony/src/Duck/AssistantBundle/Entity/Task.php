@@ -66,6 +66,13 @@ protected $assignee;
 protected $category;
 
 
+    public function __construct(){
+        $this->setCreateAt( new \DateTime() );
+
+        }
+
+
+    
 
     /**
      * Get id
@@ -218,10 +225,10 @@ protected $category;
     /**
      * Set createdBy
      *
-     * @param \Duck\AssistantBundle\User $createdBy
+     * @param \Duck\AssistantBundle\Entity\User $createdBy
      * @return Task
      */
-    public function setCreatedBy(\Duck\AssistantBundle\User $createdBy = null)
+    public function setCreatedBy(\Duck\AssistantBundle\Entity\User $createdBy = null)
     {
         $this->createdBy = $createdBy;
 
@@ -231,21 +238,20 @@ protected $category;
     /**
      * Get createdBy
      *
-     * @return \Duck\AssistantBundle\User 
+     * @return \Duck\AssistantBundle\Entity\User 
      */
     public function getCreatedBy()
     {
         return $this->createdBy;
     }
 
-
     /**
      * Set assignee
      *
-     * @param \Duck\AssistantBundle\User $assignee
+     * @param \Duck\AssistantBundle\Entity\User $assignee
      * @return Task
      */
-    public function setAssignee(\Duck\AssistantBundle\User $assignee = null)
+    public function setAssignee(\Duck\AssistantBundle\Entity\User $assignee = null)
     {
         $this->assignee = $assignee;
 
@@ -255,7 +261,7 @@ protected $category;
     /**
      * Get assignee
      *
-     * @return \Duck\AssistantBundle\User 
+     * @return \Duck\AssistantBundle\Entity\User 
      */
     public function getAssignee()
     {
@@ -265,10 +271,10 @@ protected $category;
     /**
      * Set category
      *
-     * @param \Duck\AssistantBundle\Category $category
+     * @param \Duck\AssistantBundle\Entity\Category $category
      * @return Task
      */
-    public function setCategory(\Duck\AssistantBundle\Category $category = null)
+    public function setCategory(\Duck\AssistantBundle\Entity\Category $category = null)
     {
         $this->category = $category;
 
@@ -278,19 +284,10 @@ protected $category;
     /**
      * Get category
      *
-     * @return \Duck\AssistantBundle\Category 
+     * @return \Duck\AssistantBundle\Entity\Category 
      */
     public function getCategory()
     {
         return $this->category;
     }
-
-
-    public function __construct(){
-        $this->setCreateAt( new \DateTime() );
-
-        }
-
-
-    
 }

@@ -41,6 +41,16 @@ use Doctrine\ORM\Mapping as ORM;
      */
     protected $tasks;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdBy = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setCreatedAt(new \Datetime() );
+    }
+
 
     /**
      * Get id
@@ -120,23 +130,14 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->createdAt;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->createdBy = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->setCreatedAt(new \Datetime() );
-    }
 
     /**
      * Add createdBy
      *
-     * @param \Duck\AssistantBundle\User $createdBy
+     * @param \Duck\AssistantBundle\Entity\User $createdBy
      * @return Category
      */
-    public function addCreatedBy(\Duck\AssistantBundle\User $createdBy)
+    public function addCreatedBy(\Duck\AssistantBundle\Entity\User $createdBy)
     {
         $this->createdBy[] = $createdBy;
 
@@ -146,9 +147,9 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Remove createdBy
      *
-     * @param \Duck\AssistantBundle\User $createdBy
+     * @param \Duck\AssistantBundle\Entity\User $createdBy
      */
-    public function removeCreatedBy(\Duck\AssistantBundle\User $createdBy)
+    public function removeCreatedBy(\Duck\AssistantBundle\Entity\User $createdBy)
     {
         $this->createdBy->removeElement($createdBy);
     }
@@ -166,10 +167,10 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Add tasks
      *
-     * @param \Duck\AssistantBundle\Task $tasks
+     * @param \Duck\AssistantBundle\Entity\Task $tasks
      * @return Category
      */
-    public function addTask(\Duck\AssistantBundle\Task $tasks)
+    public function addTask(\Duck\AssistantBundle\Entity\Task $tasks)
     {
         $this->tasks[] = $tasks;
 
@@ -179,9 +180,9 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Remove tasks
      *
-     * @param \Duck\AssistantBundle\Task
+     * @param \Duck\AssistantBundle\Entity\Task $tasks
      */
-    public function removeTask(\Duck\AssistantBundle\Task $tasks)
+    public function removeTask(\Duck\AssistantBundle\Entity\Task $tasks)
     {
         $this->tasks->removeElement($tasks);
     }

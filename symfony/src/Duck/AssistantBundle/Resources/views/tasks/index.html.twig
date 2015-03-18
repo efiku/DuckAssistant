@@ -2,11 +2,33 @@
 
 {% block body %}
     <h1>Task Lists</h1>
-    <ul>
-            {% for Task in tasks %}
-            <li>{{ Task.id }}</li>
-            <li>{{ Task.content }}</li>
-            <li>{{ Task.done }}</li>
-        {% endfor %}
-    </ul>
+
+<table width="100%">
+<tr>
+    <td>Nazwa</td>
+    <td>Rozpoczęcie</td>
+    <td>Koniec</td>
+    <td>Zrealizowane?</td>
+    <td>Utworzono:</td>
+    <td>Priorytet</td>
+    <td>Utworzone Przez</td>
+    <td>Przypisane do</td>
+    <td>Kategoria</td>
+</tr>
+
+
+{% for Task in tasks %}
+    <tr>
+        <td>{{ Task.content }}</td>
+        <td>{{ Task.date|date("d-m-Y") }}</td>
+        <td>{{ Task.dueDate|date("d-m-Y")  }}</td>
+        <td>{{ Task.done }}?</td>
+        <td>{{ Task.createAt|date("d-m-Y") }}</td>
+        <td>{{ Task.priority  }}</td>
+        <td>{{ Task.createdBy.getName  }}</td>
+        <td>{{ Task.assignee.getName }}</td>
+        <td>{{ Task.category.getName }}</td>
+    </tr>
+{% endfor %}
+</table>
 {% endblock %}

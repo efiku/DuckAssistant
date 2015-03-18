@@ -27,7 +27,7 @@ class TaskType extends AbstractType
                 'property' => 'name',
             ))
             ->add('assignee','entity', array(
-                'class' => 'DuckAssistantBundle:Task',
+                'class' => 'DuckAssistantBundle:User',
                 'property' => 'name',
             ))
             ->add('category','entity', array(
