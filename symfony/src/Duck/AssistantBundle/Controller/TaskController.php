@@ -2,7 +2,11 @@
 
 namespace  Duck\AssistantBundle\Controller;
 
+use Duck\AssistantBundle\Forms\TaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Duck\AssistantBundle\Entity\Task;
+
 
 class TaskController extends Controller
 {
@@ -22,7 +26,25 @@ class TaskController extends Controller
         ));
     }
 
-    //TODO: Add task method
+    public function addAction( Request $request)
+    {
+       $task = new Task();
+       $form = $this->createForm(new TaskType(), $task);
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+            return $this->redirectToRoute('duck_assistantBundle_task_Lists');
+        }
+
+        return $this->render('DuckAssistantBundle:tasks:form.html.twig', array(
+                'form' => $form->createView()
+
+        ));
+    }
+
 
     //TODO: Edit task
     //TODO: Delete task

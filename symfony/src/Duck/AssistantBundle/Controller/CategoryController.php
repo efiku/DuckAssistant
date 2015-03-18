@@ -34,7 +34,7 @@ class CategoryController extends Controller
             $entityMenager = $this->getDoctrine()->getManager();
             $entityMenager->persist($category);
             $entityMenager->flush();
-            return $this->redirectToRoute('listCategory');
+            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
         }
 
 
@@ -52,7 +52,7 @@ class CategoryController extends Controller
         {
          $entityMenager = $this->getDoctrine()->getManager();
          $entityMenager->flush();
-            return $this->redirectToRoute('listCategory');
+            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
         }
         return $this->render('DuckAssistantBundle:categories:category_mod.html.twig',
             array(
@@ -63,5 +63,20 @@ class CategoryController extends Controller
 
 
     //TODO: Delete category
+
+    public function deleteAction($id){
+        $repo = $this->getDoctrine()->getRepository('DuckAssistantBundle:Category');
+        $category = $repo->find($id);
+        if( NULL == $category){
+            throw $this->createNotFoundException('Nie ma takiej kategorii!');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($category);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('duck_assistantBundle_cat_Lists') );
+    }
 
 }

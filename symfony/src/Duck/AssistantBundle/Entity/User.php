@@ -10,48 +10,48 @@ use Doctrine\ORM\Mapping as ORM;
 */
 class User
 {
-/**
-* @ORM\Column(type="integer")
-* @ORM\Id
-* @ORM\GeneratedValue(strategy="AUTO")
-*/
-protected $id;
+    /**
+    * @ORM\Column(type="integer")
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    protected $id;
 
-/**
-* @ORM\Column(type="string", length=100)
-*/
-protected $email;
+    /**
+    * @ORM\Column(type="string", length=100)
+    */
+    protected $email;
 
-/**
-* @ORM\Column(type="string", length=20)
-*/
-protected $password;
+    /**
+    * @ORM\Column(type="string", length=20)
+    */
+    protected $password;
 
-/**
-* @ORM\Column(type="string", length=100)
-*/
-protected $name;
+    /**
+    * @ORM\Column(type="string", length=100)
+    */
+    protected $name;
 
-/**
-* @ORM\Column(type="datetime")
-*/
-protected $createdAt;
+    /**
+    * @ORM\Column(type="datetime")
+    */
+    protected $createdAt;
 
 
-/**
- * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
- */
-protected $createdTasks;
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
+     */
+    protected $createdTasks;
 
-/**
- * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
- */
-protected $assignedTasks;
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
+     */
+    protected $assignedTasks;
 
-/**
- * @ORM\ManyToOne(targetEntity="Category", inversedBy="createdBy")
- */
-protected $createdCategories;
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="createdBy")
+     */
+    protected $createdCategories;
 
 
     /**
