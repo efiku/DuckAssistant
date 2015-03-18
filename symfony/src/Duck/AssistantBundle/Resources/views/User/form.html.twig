@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}DuckAssistantBundle:User:add{% endblock %}
+
+{% block body %}
+<h1>Welcome to the User:add page</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Send data!</button>
+    {{ form_end(form) }}
+{% endblock %}

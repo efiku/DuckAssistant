@@ -5,7 +5,7 @@
  * Date: 2015-03-08
  * Time: 14:33
  */
-namespace Duck\AssistantBundle\Forms;
+namespace Duck\AssistantBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,7 +16,12 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('color', 'choice', array('choices' => array('black' => 'black', 'red' => 'red', 'green' => 'green')));
+            ->add('color', 'choice',
+                array('choices' => array(
+                            'black' => 'black',
+                            'red' => 'red',
+                            'green' => 'green')
+                ));
     }
 
     public function getName()

@@ -3,7 +3,7 @@
 namespace  Duck\AssistantBundle\Controller;
 
 use Duck\AssistantBundle\Entity\Category;
-use Duck\AssistantBundle\Forms\CategoryType;
+use Duck\AssistantBundle\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -61,8 +61,6 @@ class CategoryController extends Controller
         );
     }
 
-
-    //TODO: Delete category
 
     public function deleteAction($id){
         $repo = $this->getDoctrine()->getRepository('DuckAssistantBundle:Category');

@@ -2,7 +2,7 @@
 
 namespace  Duck\AssistantBundle\Controller;
 
-use Duck\AssistantBundle\Forms\TaskType;
+use Duck\AssistantBundle\Form\TaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Duck\AssistantBundle\Entity\Task;

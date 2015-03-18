@@ -55,6 +55,16 @@ class User
 
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdTasks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->assignedTasks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -146,7 +156,6 @@ class User
         return $this;
     }
 
-
     /**
      * Get createdAt
      *
@@ -156,21 +165,14 @@ class User
     {
         return $this->createdAt;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->createdTasks = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add createdTasks
      *
-     * @param \AppBundle\Entity\Task $createdTasks
+     * @param \Duck\AssistantBundle\Entity\Task $createdTasks
      * @return User
      */
-    public function addCreatedTask(\AppBundle\Entity\Task $createdTasks)
+    public function addCreatedTask(\Duck\AssistantBundle\Entity\Task $createdTasks)
     {
         $this->createdTasks[] = $createdTasks;
 
@@ -180,9 +182,9 @@ class User
     /**
      * Remove createdTasks
      *
-     * @param \AppBundle\Entity\Task $createdTasks
+     * @param \Duck\AssistantBundle\Entity\Task $createdTasks
      */
-    public function removeCreatedTask(\AppBundle\Entity\Task $createdTasks)
+    public function removeCreatedTask(\Duck\AssistantBundle\Entity\Task $createdTasks)
     {
         $this->createdTasks->removeElement($createdTasks);
     }
@@ -200,10 +202,10 @@ class User
     /**
      * Add assignedTasks
      *
-     * @param \AppBundle\Entity\Task $assignedTasks
+     * @param \Duck\AssistantBundle\Entity\Task $assignedTasks
      * @return User
      */
-    public function addAssignedTask(\AppBundle\Entity\Task $assignedTasks)
+    public function addAssignedTask(\Duck\AssistantBundle\Entity\Task $assignedTasks)
     {
         $this->assignedTasks[] = $assignedTasks;
 
@@ -213,9 +215,9 @@ class User
     /**
      * Remove assignedTasks
      *
-     * @param \AppBundle\Entity\Task $assignedTasks
+     * @param \Duck\AssistantBundle\Entity\Task $assignedTasks
      */
-    public function removeAssignedTask(\AppBundle\Entity\Task $assignedTasks)
+    public function removeAssignedTask(\Duck\AssistantBundle\Entity\Task $assignedTasks)
     {
         $this->assignedTasks->removeElement($assignedTasks);
     }
@@ -233,10 +235,10 @@ class User
     /**
      * Set createdCategories
      *
-     * @param \AppBundle\Entity\Category $createdCategories
+     * @param \Duck\AssistantBundle\Entity\Category $createdCategories
      * @return User
      */
-    public function setCreatedCategories(\AppBundle\Entity\Category $createdCategories = null)
+    public function setCreatedCategories(\Duck\AssistantBundle\Entity\Category $createdCategories = null)
     {
         $this->createdCategories = $createdCategories;
 
@@ -246,7 +248,7 @@ class User
     /**
      * Get createdCategories
      *
-     * @return \AppBundle\Entity\Category 
+     * @return \Duck\AssistantBundle\Entity\Category 
      */
     public function getCreatedCategories()
     {
