@@ -14,7 +14,9 @@ class TaskType extends AbstractType
             ->add('content', 'text')
             ->add('date', 'date')
             ->add('dueDate', 'date')
-            ->add('done','checkbox')
+            ->add('done','checkbox', array(
+                'required' => false
+            ))
             ->add('createAt','datetime')
             ->add('priority',  'choice',
                 array('choices' => array(
@@ -31,8 +33,8 @@ class TaskType extends AbstractType
                 'property' => 'name',
             ))
             ->add('category','entity', array(
-        'class' => 'DuckAssistantBundle:Category',
-        'property' => 'name',
+                'class' => 'DuckAssistantBundle:Category',
+                'property' => 'name',
                 ));
     }
 

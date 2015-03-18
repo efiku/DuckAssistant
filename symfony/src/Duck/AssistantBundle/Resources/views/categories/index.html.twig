@@ -2,9 +2,34 @@
 
 {% block body %}
     <h1>Categories Lists</h1>
-    <ul>
+
+    <table width="100%">
+        <tr>
+            <td>Nazwa:</td>
+            <td>Kolor:</td>
+            <td>Utworzona dnia:</td>
+            <td>Przez:</td>
+            <td>Przypisane zadania</td>
+        </tr>
+
+
             {% for Category in categories %}
-            <li>{{ Category.name }} - <strong style="color: {{ Category.color }}">{{ Category.color }}</strong></li>
-            {% endfor %}
-    </ul>
+                <tr>
+                    <td>{{ Category.name }} </td>
+                    <td><strong style="color: {{ Category.color }}">{{ Category.color }}</strong></td>
+                    <td>{{ Category.createdAt|date('d-m-Y') }} </td>
+                    <td>
+                        {% for User in Category.createdBy %}
+                            {{ User.name }}
+                        {% endfor %}
+                        {# //TODO: I need to investigate this magic. #}
+                    </td>
+                    <td>
+                    {% for Task in Category.tasks %}
+                        {{ Task.content }} &bullet;
+                    {% endfor %}
+                    </td>
+                </tr>
+          {% endfor %}
+    </table>
 {% endblock %}
