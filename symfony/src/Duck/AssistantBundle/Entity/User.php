@@ -49,7 +49,7 @@ class User
     protected $assignedTasks;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="createdBy")
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy")
      */
     protected $createdCategories;
 
@@ -253,5 +253,28 @@ class User
     public function getCreatedCategories()
     {
         return $this->createdCategories;
+    }
+
+    /**
+     * Add createdCategories
+     *
+     * @param \Duck\AssistantBundle\Entity\Category $createdCategories
+     * @return User
+     */
+    public function addCreatedCategory(\Duck\AssistantBundle\Entity\Category $createdCategories)
+    {
+        $this->createdCategories[] = $createdCategories;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdCategories
+     *
+     * @param \Duck\AssistantBundle\Entity\Category $createdCategories
+     */
+    public function removeCreatedCategory(\Duck\AssistantBundle\Entity\Category $createdCategories)
+    {
+        $this->createdCategories->removeElement($createdCategories);
     }
 }

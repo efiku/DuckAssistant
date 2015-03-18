@@ -4,7 +4,7 @@ namespace Duck\AssistantBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class TaskType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -36,6 +36,15 @@ class TaskType extends AbstractType
                 'class' => 'DuckAssistantBundle:Category',
                 'property' => 'name',
                 ));
+    }
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Duck\AssistantBundle\Entity\Task'
+        ));
     }
 
     public function getName()

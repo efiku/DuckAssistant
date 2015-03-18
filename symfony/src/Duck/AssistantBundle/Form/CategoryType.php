@@ -9,7 +9,7 @@ namespace Duck\AssistantBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class CategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -21,7 +21,17 @@ class CategoryType extends AbstractType
                             'black' => 'black',
                             'red' => 'red',
                             'green' => 'green')
-                ));
+                ))
+            ->add('CreatedBy', 'entity' , array(
+                'class' => 'DuckAssistantBundle:User',
+                'property' => 'name',
+            ));
+    }
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Duck\AssistantBundle\Entity\Category'
+        ));
     }
 
     public function getName()

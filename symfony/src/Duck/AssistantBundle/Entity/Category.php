@@ -33,7 +33,8 @@ use Doctrine\ORM\Mapping as ORM;
     protected $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="createdCategories")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
+     * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;
     /**
@@ -47,8 +48,7 @@ use Doctrine\ORM\Mapping as ORM;
     public function __construct()
     {
         $this->createdBy = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->setCreatedAt(new \Datetime() );
+         $this->setCreatedAt(new \Datetime() );
     }
 
 
@@ -132,32 +132,22 @@ use Doctrine\ORM\Mapping as ORM;
     }
 
     /**
-     * Add createdBy
+     * Set createdBy
      *
      * @param \Duck\AssistantBundle\Entity\User $createdBy
      * @return Category
      */
-    public function addCreatedBy(\Duck\AssistantBundle\Entity\User $createdBy)
+    public function setCreatedBy(\Duck\AssistantBundle\Entity\User $createdBy)
     {
-        $this->createdBy[] = $createdBy;
+        $this->createdBy = $createdBy;
 
         return $this;
     }
 
     /**
-     * Remove createdBy
-     *
-     * @param \Duck\AssistantBundle\Entity\User $createdBy
-     */
-    public function removeCreatedBy(\Duck\AssistantBundle\Entity\User $createdBy)
-    {
-        $this->createdBy->removeElement($createdBy);
-    }
-
-    /**
      * Get createdBy
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Duck\AssistantBundle\Entity\User 
      */
     public function getCreatedBy()
     {

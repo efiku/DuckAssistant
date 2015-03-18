@@ -9,61 +9,63 @@ use Doctrine\ORM\Mapping as ORM;
 */
 class Task
 {
-/**
-* @ORM\Column(type="integer")
-* @ORM\Id
-* @ORM\GeneratedValue(strategy="AUTO")
-*/
-protected $id;
+    /**
+    * @ORM\Column(type="integer")
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    protected $id;
 
-/**
-* @ORM\Column(type="string")
-*/
-protected $content;
+    /**
+    * @ORM\Column(type="string")
+    */
+    protected $content;
 
-/**
-* @ORM\Column(type="date")
-*/
-protected $date;
+    /**
+    * @ORM\Column(type="date")
+    */
+    protected $date;
 
-/**
-* @ORM\Column(type="date")
-*/
-protected $dueDate;
-
-
-/**
- * @ORM\Column(type="boolean")
- */
-protected $done;
-
-/**
- * @ORM\Column(type="datetime")
- */
-protected $createAt;
+    /**
+    * @ORM\Column(type="date")
+    */
+    protected $dueDate;
 
 
-/**
- * @ORM\Column(type="integer")
- */
-protected $priority;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $done;
 
-/**
- * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
- */
-protected $createdBy;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $createAt;
 
 
-/**
- * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
- */
-protected $assignee;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $priority;
 
-/**
- * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
- * @ORM\JoinColumn(nullable=True)
- */
-protected $category;
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false)
+     */
+    protected $createdBy;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id", nullable=false)
+     */
+    protected $assignee;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
+     *
+     */
+    protected $category;
 
 
     public function __construct(){
@@ -72,7 +74,6 @@ protected $category;
         }
 
 
-    
 
     /**
      * Get id
@@ -228,7 +229,7 @@ protected $category;
      * @param \Duck\AssistantBundle\Entity\User $createdBy
      * @return Task
      */
-    public function setCreatedBy(\Duck\AssistantBundle\Entity\User $createdBy = null)
+    public function setCreatedBy(\Duck\AssistantBundle\Entity\User $createdBy)
     {
         $this->createdBy = $createdBy;
 
@@ -251,7 +252,7 @@ protected $category;
      * @param \Duck\AssistantBundle\Entity\User $assignee
      * @return Task
      */
-    public function setAssignee(\Duck\AssistantBundle\Entity\User $assignee = null)
+    public function setAssignee(\Duck\AssistantBundle\Entity\User $assignee)
     {
         $this->assignee = $assignee;
 
