@@ -5,6 +5,7 @@
 
 <table width="100%">
 <tr>
+    <td>ID:</td>
     <td>Nazwa</td>
     <td>Rozpoczęcie</td>
     <td>Koniec</td>
@@ -19,15 +20,16 @@
 
 {% for Task in tasks %}
     <tr>
+        <td>{{ Task.id }}</td>
         <td>{{ Task.content }}</td>
         <td>{{ Task.date|date("d-m-Y") }}</td>
         <td>{{ Task.dueDate|date("d-m-Y")  }}</td>
         <td>{{ Task.done|replace({'1': "Tak", "0": "Nie"}) }}</td>
         <td>{{ Task.createAt|date("d-m-Y") }}</td>
         <td>{{ Task.priority  }}</td>
-        <td>{{ Task.createdBy.getName  }}</td>
-        <td>{{ Task.assignee.getName }}</td>
-        <td>{{ Task.category.getName }}</td>
+        <td>{{ Task.createdBy.name  }}</td>
+        <td>{{ Task.assignee ? Task.assignee.name  }}</td>
+        <td>{{ Task.category.name }}</td>
     </tr>
 {% endfor %}
 </table>

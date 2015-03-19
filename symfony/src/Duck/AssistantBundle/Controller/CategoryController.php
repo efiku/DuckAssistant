@@ -3,78 +3,48 @@
 namespace  Duck\AssistantBundle\Controller;
 
 use Duck\AssistantBundle\Entity\Category;
-use Duck\AssistantBundle\Form\CategoryType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
-  /* Main Route / for prefix /cat */
     public function indexAction()
     {
-        $EN = $this->getDoctrine()->getManager();
-
-        $repo = $EN->getRepository('DuckAssistantBundle:Category');
-
-        $categories = $repo->findAll();
-
-
-        return $this->render('DuckAssistantBundle:categories:index.html.twig', array(
-            'categories' =>  $categories
-        ));
-    }
-
-    /* Route /add for prefix /cat */
-    public function addAction( Request $request){
-        $category = new Category();
-        $form = $this->createForm( new CategoryType(), $category);
-
-        if($form->handleRequest($request)->isValid())
-        {
-            $entityMenager = $this->getDoctrine()->getManager();
-            $entityMenager->persist($category);
-            $entityMenager->flush();
-            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
-        }
-
-
-        return $this->render('DuckAssistantBundle:categories:category_mod.html.twig', array(
-            'form' => $form->createView()
-
-        ));
-    }
-
-    /* Route /edit/id for prefix /cat */
-    public function editAction( Category $category, Request $request ) {
-
-         $form = $this->createForm( new CategoryType(), $category);
-        if($form->handleRequest($request)->isValid())
-        {
-         $entityMenager = $this->getDoctrine()->getManager();
-         $entityMenager->flush();
-            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
-        }
-        return $this->render('DuckAssistantBundle:categories:category_mod.html.twig',
-            array(
-                'form' => $form->createView()
-            )
+        return $this->BaseList(
+            'DuckAssistantBundle:Category',
+            'DuckAssistantBundle:categories:index.html.twig',
+            'categories'
         );
     }
 
-
-    public function deleteAction($id){
-        $repo = $this->getDoctrine()->getRepository('DuckAssistantBundle:Category');
-        $category = $repo->find($id);
-        if( NULL == $category){
-            throw $this->createNotFoundException('Nie ma takiej kategorii!');
-        }
-
-        $em = $this->getDoctrine()->getManager();
-
-        $em->remove($category);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('duck_assistantBundle_cat_Lists') );
+    public function addAction(Request $request )
+    {
+        return $this->BaseAdd(
+            $request,
+            'DuckAssistantBundle:categories:category_mod.html.twig',
+            'duck_assistantBundle_cat_Lists',
+            'CATEGORY'
+        );
     }
 
+    public function editAction(Request $request, $id)
+    {
+        return  $this->BaseEdit(
+            $request,
+            $id,
+            'DuckAssistantBundle:categories:category_mod.html.twig',
+            'duck_assistantBundle_cat_Lists',
+            'DuckAssistantBundle:Category',
+            'CATEGORY'
+        );
+    }
+
+    public function delAction($id)
+    {
+        return $this->BaseDelete(
+            $id,
+            'Category not found in database',
+            'duck_assistantBundle_cat_Lists',
+            'DuckAssistantBundle:Category'
+        );
+    }
 }

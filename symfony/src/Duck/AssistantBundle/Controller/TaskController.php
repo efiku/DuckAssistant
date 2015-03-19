@@ -2,52 +2,53 @@
 
 namespace  Duck\AssistantBundle\Controller;
 
-use Duck\AssistantBundle\Form\TaskType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Duck\AssistantBundle\Entity\Task;
 
 
-class TaskController extends Controller
+class TaskController extends BaseController
 {
 
-    /* Route / for prefix /task */
     public function indexAction()
     {
-        $EN = $this->getDoctrine()->getManager();
-
-        $repo = $EN->getRepository('DuckAssistantBundle:Task');
-
-        $tasks = $repo->findAll();
-
-
-        return $this->render('DuckAssistantBundle:tasks:index.html.twig', array(
-            'tasks' => $tasks
-        ));
+        return $this->BaseList(
+            'DuckAssistantBundle:Task',
+            'DuckAssistantBundle:tasks:index.html.twig',
+            'tasks'
+        );
     }
 
-    public function addAction( Request $request)
+    public function addAction(Request $request )
     {
-       $task = new Task();
-       $form = $this->createForm(new TaskType(), $task);
-
-        if($form->handleRequest($request)->isValid())
-        {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($task);
-            $em->flush();
-            return $this->redirectToRoute('duck_assistantBundle_task_Lists');
-        }
-
-        return $this->render('DuckAssistantBundle:tasks:form.html.twig', array(
-                'form' => $form->createView()
-
-        ));
+        return $this->BaseAdd(
+            $request,
+            'DuckAssistantBundle:tasks:form.html.twig',
+            'duck_assistantBundle_task_Lists',
+            'TASK'
+        );
     }
 
+    public function editAction(Request $request, $id)
+    {
+        return  $this->BaseEdit(
+            $request,
+            $id,
+            'DuckAssistantBundle:tasks:form.html.twig',
+            'duck_assistantBundle_task_Lists',
+            'DuckAssistantBundle:Task',
+            'TASK'
+        );
+    }
 
-    //TODO: Edit task
-    //TODO: Delete task
+    public function delAction($id)
+    {
+        return $this->BaseDelete(
+            $id,
+            'Task not found in database',
+            'duck_assistantBundle_task_Lists',
+            'DuckAssistantBundle:Task'
+        );
+    }
 }
 
 
