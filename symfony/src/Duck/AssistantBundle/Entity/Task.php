@@ -50,14 +50,14 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
-     * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $createdBy;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
-     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $assignee;
 

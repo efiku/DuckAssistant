@@ -34,7 +34,7 @@ use Doctrine\ORM\Mapping as ORM;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
-     * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $createdBy;
     /**

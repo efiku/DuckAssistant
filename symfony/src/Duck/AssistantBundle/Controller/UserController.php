@@ -11,9 +11,17 @@ class UserController extends Controller
 {
     public function indexAction()
     {
+        $EN = $this->getDoctrine()->getManager();
+
+        $repo = $EN->getRepository('DuckAssistantBundle:User');
+
+        $users = $repo->findAll();
+
+
         return $this->render('DuckAssistantBundle:User:index.html.twig', array(
-                // ...
-            ));    }
+            'users' => $users
+        ));
+    }
 
     public function addAction(Request $request )
     {
@@ -32,16 +40,34 @@ class UserController extends Controller
                 'form' => $form->createView()
             ));    }
 
-    public function delAction()
+    public function delAction($id)
     {
-        return $this->render('DuckAssistantBundle:User:del.html.twig', array(
-                // ...
-            ));    }
+        $repo = $this->getDoctrine()->getRepository('DuckAssistantBundle:User');
+        $user = $repo->find($id);
+        if( NULL == $user){
+            throw $this->createNotFoundException('Nie ma takiego uzytkownika!');
+        }
+        $em = $this->getDoctrine()->getManager();
 
-    public function editAction()
+        $em->remove($user);
+        $em->flush();
+        return $this->redirect($this->generateUrl('duck_assistantBundle_user_index') );
+
+    }
+
+    public function editAction(User $user, Request $request)
     {
+        $form = $this->createForm(new UserType(), $user);
+        $form->handleRequest($request);
+
+        if($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+
+            $em->flush();
+            return $this->redirectToRoute('duck_assistantBundle_user_index');
+        }
         return $this->render('DuckAssistantBundle:User:form.html.twig', array(
-                // ...
+               'form' => $form->createView()
             ));    }
 
 }

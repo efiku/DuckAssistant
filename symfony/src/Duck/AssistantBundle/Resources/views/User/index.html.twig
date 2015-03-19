@@ -1,7 +1,47 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}DuckAssistantBundle:User:index{% endblock %}
+{% block title %} User List{% endblock %}
 
 {% block body %}
-<h1>Welcome to the User:index page</h1>
+<h1>Here you can see users: </h1>
+    <style>
+        td { border: 1px solid #ccc; border-top: none;}
+    </style>
+    <table width="100%">
+        <tr>
+            <td>Lp:</td>
+            <td>Nazwa:</td>
+            <td>e-mail:</td>
+            <td>Utworzo:ny:</td>
+            <td>Utworzone zadania</td>
+            <td>Przypisane zadania:</td>
+            <td>Utworzone kategorie:</td>
+        </tr>
+
+        {% for User in users %}
+            <tr>
+                <td>{{ User.id }}</td>
+                <td>{{ User.name }}</td>
+                <td>{{ User.email }}</td>
+                <td>{{ User.createdAt|date('d-m-y') }}</td>
+                <td>
+                 {% for Task in User.createdTasks %}
+                     {{ Task.content  }},
+                {% endfor %}
+                </td>
+                <td>
+                    {% for Task in User.assignedTasks %}
+                        {{ Task.content  }},
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for Category in User.createdCategories %}
+                        {{ Category.name  }},
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
 {% endblock %}
