@@ -1,8 +1,19 @@
 ##DuckAssistant
 
-Simple Yellow Duck! *Work in progress...*
+Checkout ours personal Assistant! 
 
-###How to install
+This application helps manage your tasks.
+
+## Features
+* Add new users 
+* Manage users
+* Create tasks with specified options
+* Manage tasks, assign tasks to users
+* Add categories
+* Manage Categories
+* .... And more!
+
+### How to install
 
 **Downloading project and dependencies**
 ```
