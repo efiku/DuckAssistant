@@ -8,7 +8,6 @@
 
 namespace Duck\AssistantBundle\Controller;
 
-use Doctrine\ORM\Mapping\Entity;
 use Duck\AssistantBundle\Entity\Category;
 use Duck\AssistantBundle\Entity\Task;
 use Duck\AssistantBundle\Entity\User;
@@ -19,8 +18,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 
+/**
+ * Class BaseController
+ * @package Duck\AssistantBundle\Controller
+ */
 class BaseController  extends  Controller{
 
+    /**
+     * Show list of Entities
+     * @param $repository
+     * @param $template_to_render
+     * @param $first_param
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function BaseList( $repository , $template_to_render, $first_param){
         $enMan = $this->getDoctrine()->getManager();
         $repo = $enMan->getRepository($repository);
@@ -31,6 +41,11 @@ class BaseController  extends  Controller{
         ));
     }
 
+    /**
+     * Return entity Array [0] Entity object, [1] FormBuilder for [0]
+     * @param $type
+     * @return array
+     */
     public function BaseEntity($type){
 
         $entity = array(null,null);
@@ -58,6 +73,15 @@ class BaseController  extends  Controller{
         return $entity;
     }
 
+    /**
+     * Add Users/Cat/Tasks universal method
+     * @param Request $request
+     * @param $template_to_render
+     * @param $route
+     * @param $type
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function BaseAdd( Request $request, $template_to_render, $route,  $type){
 
         $ent = $this->BaseEntity($type);
@@ -85,6 +109,16 @@ class BaseController  extends  Controller{
     }
 
 
+    /**
+     * Edit Entities
+     * @param Request $request
+     * @param $id
+     * @param $render_template
+     * @param $route
+     * @param $entity
+     * @param $type
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function BaseEdit(Request $request, $id, $render_template, $route,$entity, $type){
         $ent = $this->BaseEntity($type);
 
@@ -103,6 +137,14 @@ class BaseController  extends  Controller{
         ));
     }
 
+    /**
+     * Delete entities from database
+     * @param $id
+     * @param $exception
+     * @param $route
+     * @param $repository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function BaseDelete($id, $exception , $route, $repository){
 
         $repo = $this->getDoctrine()->getRepository($repository);
