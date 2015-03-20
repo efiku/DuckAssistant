@@ -1,26 +1,25 @@
-{% extends '::base.html.twig' %}
+{% extends 'DuckAssistantBundle::base.html.twig' %}
 
 {% block body %}
-    <h1>Task Lists</h1>
+<h1>Task Lists</h1>
 <div class="col-md-12">
-    <table class="table">
+
+<table class="table">
     <thead>
-    <th>#</th>
-    <th>Nazwa</th>
-    <th>Rozpoczęcie</th>
-    <th>Koniec</th>
-    <th>Zrealizowane</th>
-    <th>Utworzono:</th>
-    <th>Priorytet</th>
-    <th>Utworzone Przez</th>
-    <th>Przypisane do</th>
-    <th>Kategoria</th>
-</thead>
+        <th>Nazwa</th>
+        <th>Rozpoczęcie</th>
+        <th>Koniec</th>
+        <th>Zrealizowane</th>
+        <th>Utworzono:</th>
+        <th>Priorytet</th>
+        <th>Utworzone Przez</th>
+        <th>Przypisane do</th>
+        <th>Kategoria</th>
+    </thead>
 
 
 {% for Task in list %}
     <tr>
-        <td>{{ Task.id }}</td>
         <td>{{ Task.content }}</td>
         <td>{{ Task.date|date("d-m-Y") }}</td>
         <td>{{ Task.dueDate|date("d-m-Y")  }}</td>
@@ -33,4 +32,5 @@
     </tr>
 {% endfor %}
 </table>
+</div>
 {% endblock %}
