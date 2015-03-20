@@ -1,9 +1,27 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+<div class="container">
+<div class="row">
+    <div class="form-group">
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit">Send data!</button>
-    {{ form_end(form) }}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_label(form.content) }}:
+            {{ form_widget(form.content,{ 'attr': {'class': 'form-control', 'placeholder': 'Place your text here!'} }) }}
+            {{ form_row(form.dueDate,{ 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.date,{ 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.createAt,{ 'attr': {'class': 'form-control','readonly':''}}) }}
+            {{ form_row(form.priority,{ 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.createdBy,{ 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.assignee,{ 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.category,{ 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.done,{ 'attr': {'class': 'form-control'}}) }}
+        <br>
+            <button type="submit" class="form-control">Send!</button>
+            {{ form_end(form) }}
+    </div>
+
+</div>
+</div>
 {% endblock %}

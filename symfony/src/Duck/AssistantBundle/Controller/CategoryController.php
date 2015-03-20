@@ -28,7 +28,7 @@ class CategoryController extends BaseController
     {
         return $this->BaseAdd(
             $request,
-            'DuckAssistantBundle:categories:category_mod.html.twig',
+            'DuckAssistantBundle:categories:form.html.twig',
             'duck_assistantBundle_cat_Lists'
         );
     }
@@ -38,7 +38,7 @@ class CategoryController extends BaseController
         return  $this->BaseEdit(
             $request,
             $id,
-            'DuckAssistantBundle:categories:category_mod.html.twig',
+            'DuckAssistantBundle:categories:form.html.twig',
             'duck_assistantBundle_cat_Lists',
             'DuckAssistantBundle:Category'
         );
