@@ -44,7 +44,7 @@ class CategoryController extends BaseController
         );
     }
 
-    public function delAction($id)
+    public function deleteAction($id)
     {
         return $this->BaseDelete(
             $id,
