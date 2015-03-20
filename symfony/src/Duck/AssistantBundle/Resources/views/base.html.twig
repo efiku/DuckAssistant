@@ -12,6 +12,14 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
+{%
+set mainMenu = [
+{'path': 'duck_assistant_homepage', 'name':'Home' },
+{'path': 'duck_assistantBundle_cat_Lists', 'name':'Kategorie' },
+{'path': 'duck_assistantBundle_task_Lists', 'name':'Zadania' },
+{'path': 'duck_assistantBundle_user_index', 'name':'Użytkownicy' }
+]
+%}
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -21,26 +29,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">DuckAssistant</a>
+            <a class="navbar-brand" href="#">Duck Assistant</a>
         </div>
-{%
-        set mainMenu = [
-{'path': 'duck_assistant_homepage', 'name':'Home' },
-{'path': 'duck_assistantBundle_cat_Lists', 'name':'Categories' },
-{'path': 'duck_assistantBundle_task_Lists', 'name':'Tasks' },
-{'path': 'duck_assistantBundle_user_index', 'name':'Users' }
-]
-        %}
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 {%  for item in mainMenu %}
                     <li><a href="{{ path(item['path']) }}">{{ item['name'] }}</a></li>
                 {% endfor %}
-
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
+
 <div class="container">
 {% block body %}{% endblock %}
 </div>
