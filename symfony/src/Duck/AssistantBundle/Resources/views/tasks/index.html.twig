@@ -1,7 +1,9 @@
 {% extends 'DuckAssistantBundle::base.html.twig' %}
 {% block title %}Zadania{% endblock %}
 {% block body %}
-<h1>Lista Zadań</h1>
+<h1>Lista Zadań
+    <a href="{{ path('duck_assistantBundle_task_add') }}"><button class="btn btn-primary">Dodaj Zadanie</button></a>
+</h1>
 <div class="col-md-12">
 
 <table class="table">
@@ -15,6 +17,7 @@
         <th>Utworzone Przez</th>
         <th>Przypisane do</th>
         <th>Kategoria</th>
+        <th>Akcja:</th>
     </thead>
 
 
@@ -29,6 +32,10 @@
         <td>{{ Task.createdBy.name  }}</td>
         <td>{{ Task.assignee ? Task.assignee.name  }}</td>
         <td>{{ Task.category.name }}</td>
+        <td>
+            <a class="label label-primary" href="{{ path('duck_assistantBundle_task_edit', {'id': Task.id }) }}">Edytuj</a> &nbsp;
+            <a class="label label-danger" href="{{ path('duck_assistantBundle_task_delete', {'id':  Task.id }) }}">Usuń</a>
+        </td>
     </tr>
 {% endfor %}
 </table>

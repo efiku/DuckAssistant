@@ -3,7 +3,9 @@
 {% block title %}Użytkownicy{% endblock %}
 
 {% block body %}
-<h1>Lista użytkowników </h1>
+<h1>Lista użytkowników
+    <a href="{{ path('duck_assistantBundle_user_add') }}"><button class="btn btn-primary">Dodaj Użytkownika</button></a>
+</h1>
 <div class="col-md-12">
     <table class="table">
         <thead>
@@ -14,6 +16,7 @@
             <th>Utworzone zadania</th>
             <th>Przypisane zadania:</th>
             <th>Utworzone kategorie:</th>
+            <th>Akcja</th>
         </thead>
 
         {% for User in list %}
@@ -36,6 +39,11 @@
                     {% for Category in User.createdCategories %}
                         {{ Category.name  }},
                     {% endfor %}
+                </td>
+
+                <td>
+                    <a class="label label-primary" href="{{ path('duck_assistantBundle_user_edit', {'id': User.id }) }}">Edytuj</a> &nbsp;
+                    <a class="label label-danger" href="{{ path('duck_assistantBundle_user_del', {'id':  User.id }) }}">Usuń</a>
                 </td>
             </tr>
         {% endfor %}
