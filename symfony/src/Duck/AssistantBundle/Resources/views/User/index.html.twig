@@ -4,19 +4,17 @@
 
 {% block body %}
 <h1>Here you can see users: </h1>
-    <style>
-        td { border: 1px solid #ccc; border-top: none;}
-    </style>
-    <table width="100%">
-        <tr>
-            <td>Lp:</td>
-            <td>Nazwa:</td>
-            <td>e-mail:</td>
-            <td>Utworzo:ny:</td>
-            <td>Utworzone zadania</td>
-            <td>Przypisane zadania:</td>
-            <td>Utworzone kategorie:</td>
-        </tr>
+<div class="col-md-12">
+    <table class="table">
+        <thead>
+            <th>#</th>
+            <th>Nazwa:</th>
+            <th>e-mail:</th>
+            <th>Utworzony:</th>
+            <th>Utworzone zadania</th>
+            <th>Przypisane zadania:</th>
+            <th>Utworzone kategorie:</th>
+        </thead>
 
         {% for User in users %}
             <tr>
