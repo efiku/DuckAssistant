@@ -45,8 +45,8 @@ assetic:
                     - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/js/bootstrap.js
             bootstrap_css:
                 inputs:
-                    - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap.css
-                    - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap-theme.css
+                    - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap.min.css
+                #    - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap-theme.css
                 filters: [cssrewrite]
 
             bootstrap_glyphicons_ttf:
