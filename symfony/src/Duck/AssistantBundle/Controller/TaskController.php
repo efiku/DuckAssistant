@@ -2,6 +2,7 @@
 
 namespace  Duck\AssistantBundle\Controller;
 
+use Duck\AssistantBundle\Form\TaskType;
 use Symfony\Component\HttpFoundation\Request;
 use Duck\AssistantBundle\Entity\Task;
 
@@ -9,12 +10,18 @@ use Duck\AssistantBundle\Entity\Task;
 class TaskController extends BaseController
 {
 
+    public function createNewItem(){
+        return new Task();
+    }
+
+    public function createFormType(){
+        return new TaskType();
+    }
     public function indexAction()
     {
         return $this->BaseList(
             'DuckAssistantBundle:Task',
-            'DuckAssistantBundle:tasks:index.html.twig',
-            'tasks'
+            'DuckAssistantBundle:tasks:index.html.twig'
         );
     }
 
@@ -23,8 +30,7 @@ class TaskController extends BaseController
         return $this->BaseAdd(
             $request,
             'DuckAssistantBundle:tasks:form.html.twig',
-            'duck_assistantBundle_task_Lists',
-            'TASK'
+            'duck_assistantBundle_task_Lists'
         );
     }
 
@@ -35,8 +41,7 @@ class TaskController extends BaseController
             $id,
             'DuckAssistantBundle:tasks:form.html.twig',
             'duck_assistantBundle_task_Lists',
-            'DuckAssistantBundle:Task',
-            'TASK'
+            'DuckAssistantBundle:Task'
         );
     }
 
