@@ -2,20 +2,20 @@
 
 {% block body %}
     <h1>Task Lists</h1>
-
-<table width="100%">
-<tr>
-    <td>ID:</td>
-    <td>Nazwa</td>
-    <td>Rozpoczęcie</td>
-    <td>Koniec</td>
-    <td>Zrealizowane?</td>
-    <td>Utworzono:</td>
-    <td>Priorytet</td>
-    <td>Utworzone Przez</td>
-    <td>Przypisane do</td>
-    <td>Kategoria</td>
-</tr>
+<div class="col-md-12">
+    <table class="table">
+    <thead>
+    <th>#</th>
+    <th>Nazwa</th>
+    <th>Rozpoczęcie</th>
+    <th>Koniec</th>
+    <th>Zrealizowane</th>
+    <th>Utworzono:</th>
+    <th>Priorytet</th>
+    <th>Utworzone Przez</th>
+    <th>Przypisane do</th>
+    <th>Kategoria</th>
+</thead>
 
 
 {% for Task in list %}

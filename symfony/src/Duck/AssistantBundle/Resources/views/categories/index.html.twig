@@ -2,15 +2,15 @@
 
 {% block body %}
     <h1>Categories Lists</h1>
-
-    <table width="100%">
-        <tr>
-            <td>Nazwa:</td>
-            <td>Kolor:</td>
-            <td>Utworzona dnia:</td>
-            <td>Przez:</td>
-            <td>Przypisane zadania</td>
-        </tr>
+<div class="col-md-12">
+    <table class="table">
+        <thead>
+            <th>Nazwa:</th>
+            <th>Kolor:</th>
+            <th>Utworzona dnia:</th>
+            <th>Przez:</th>
+            <th>Przypisane zadania</th>
+        </thead>
 
 
             {% for Category in list %}
@@ -27,4 +27,5 @@
                 </tr>
           {% endfor %}
     </table>
+</div>
 {% endblock %}
