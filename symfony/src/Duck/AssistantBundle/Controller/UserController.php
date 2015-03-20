@@ -2,17 +2,26 @@
 
 namespace Duck\AssistantBundle\Controller;
 
+use Duck\AssistantBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Duck\AssistantBundle\Entity\User;
 
 class UserController extends BaseController
 {
+
+    public function createNewItem(){
+        return new User();
+    }
+
+    public function createFormType(){
+        return new UserType();
+    }
+
     public function indexAction()
     {
         return $this->BaseList(
             'DuckAssistantBundle:User',
-            'DuckAssistantBundle:User:index.html.twig',
-            'users'
+            'DuckAssistantBundle:User:index.html.twig'
         );
     }
 
@@ -21,8 +30,7 @@ class UserController extends BaseController
         return $this->BaseAdd(
             $request,
             'DuckAssistantBundle:User:form.html.twig',
-            'duck_assistantBundle_user_index',
-            'USER'
+            'duck_assistantBundle_user_index'
         );
     }
 
@@ -33,8 +41,7 @@ class UserController extends BaseController
             $id,
             'DuckAssistantBundle:User:form.html.twig',
             'duck_assistantBundle_user_index',
-            'DuckAssistantBundle:User',
-            'USER'
+            'DuckAssistantBundle:User'
         );
     }
 

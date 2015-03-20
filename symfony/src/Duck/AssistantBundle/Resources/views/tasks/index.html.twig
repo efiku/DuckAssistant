@@ -18,13 +18,13 @@
 </tr>
 
 
-{% for Task in tasks %}
+{% for Task in list %}
     <tr>
         <td>{{ Task.id }}</td>
         <td>{{ Task.content }}</td>
         <td>{{ Task.date|date("d-m-Y") }}</td>
         <td>{{ Task.dueDate|date("d-m-Y")  }}</td>
-        <td>{{ Task.done|replace({'1': "Tak", "0": "Nie"}) }}</td>
+        <td>{{ Task.done ? "Tak" : "Nie" }}</td>
         <td>{{ Task.createAt|date("d-m-Y") }}</td>
         <td>{{ Task.priority  }}</td>
         <td>{{ Task.createdBy.name  }}</td>

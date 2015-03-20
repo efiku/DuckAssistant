@@ -8,13 +8,9 @@
 
 namespace Duck\AssistantBundle\Controller;
 
-use Duck\AssistantBundle\Entity\Category;
-use Duck\AssistantBundle\Entity\Task;
-use Duck\AssistantBundle\Entity\User;
-use Duck\AssistantBundle\Form\CategoryType;
-use Duck\AssistantBundle\Form\TaskType;
-use Duck\AssistantBundle\Form\UserType;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -22,81 +18,56 @@ use Symfony\Component\HttpFoundation\Request;
  * Class BaseController
  * @package Duck\AssistantBundle\Controller
  */
-class BaseController  extends  Controller{
+abstract class BaseController  extends  Controller{
+
+
+    /**
+     * Return new Entity
+     * @return Entity
+     */
+    abstract public function createNewItem();
+
+    /**
+     * Return new Form type
+     * @return FormType
+     */
+    abstract public function createFormType();
 
     /**
      * Show list of Entities
      * @param $repository
      * @param $template_to_render
-     * @param $first_param
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function BaseList( $repository , $template_to_render, $first_param){
+    public function BaseList( $repository , $template_to_render){
         $enMan = $this->getDoctrine()->getManager();
         $repo = $enMan->getRepository($repository);
         $entities = $repo->findAll();
 
         return $this->render($template_to_render, array(
-           $first_param  => $entities
+           'list'  => $entities
         ));
     }
 
-    /**
-     * Return entity Array [0] Entity object, [1] FormBuilder for [0]
-     * @param $type
-     * @return array
-     */
-    public function BaseEntity($type){
-
-        $entity = array(null,null);
-        switch ($type){
-            case 'CATEGORY' :
-                $entity[0] = new Category();
-                $entity[1] = new CategoryType();
-
-                break;
-            case 'USER':
-                $entity[0] = new User();
-                $entity[1] = new UserType();
-
-                break;
-            case 'TASK' :
-                $entity[0] = new Task();
-                $entity[1] = new TaskType();
-
-                break;
-
-            default :
-                $entity = null;
-        }
-
-        return $entity;
-    }
 
     /**
      * Add Users/Cat/Tasks universal method
      * @param Request $request
      * @param $template_to_render
      * @param $route
-     * @param $type
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function BaseAdd( Request $request, $template_to_render, $route,  $type){
+    public function BaseAdd( Request $request, $template_to_render, $route){
+        $type[0] = $this->createFormType();
+        $type[1] = $this->createNewItem() ;
 
-        $ent = $this->BaseEntity($type);
-
-        if( !is_array($ent) && null == $ent )
-        {
-            throw new \Exception('Unable to detect entity!');
-        }
-
-        $form = $this->createForm($ent[1], $ent[0]);
+        $form = $this->createForm($type[0],$type[1] );
 
         if($form->handleRequest($request)->isValid())
         {
             $enMen = $this->getDoctrine()->getManager();
-            $enMen->persist($ent[0]);
+            $enMen->persist($type[1]);
             $enMen->flush();
 
             return $this->redirectToRoute($route);
@@ -108,7 +79,6 @@ class BaseController  extends  Controller{
 
     }
 
-
     /**
      * Edit Entities
      * @param Request $request
@@ -116,19 +86,17 @@ class BaseController  extends  Controller{
      * @param $render_template
      * @param $route
      * @param $entity
-     * @param $type
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse | \Symfony\Component\HttpFoundation\Response
      */
-    public function BaseEdit(Request $request, $id, $render_template, $route,$entity, $type){
-        $ent = $this->BaseEntity($type);
+    public function BaseEdit(Request $request, $id, $render_template, $route,$entity){
+        $type = $this->createFormType();
 
         $entObject = $this->getDoctrine()->getRepository($entity)->find($id);
-
-        $form = $this->createForm($ent[1],$entObject);
+        $form = $this->createForm($type,$entObject);
 
         if($form->handleRequest($request)->isValid()){
-            $enM = $this->getDoctrine()->getManager();
-            $enM->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
             return $this->redirectToRoute($route);
         }
 

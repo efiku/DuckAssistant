@@ -3,16 +3,24 @@
 namespace  Duck\AssistantBundle\Controller;
 
 use Duck\AssistantBundle\Entity\Category;
+use Duck\AssistantBundle\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends BaseController
 {
+    public function createNewItem(){
+        return new Category();
+    }
+
+    public function createFormType(){
+        return new CategoryType();
+    }
+
     public function indexAction()
     {
         return $this->BaseList(
             'DuckAssistantBundle:Category',
-            'DuckAssistantBundle:categories:index.html.twig',
-            'categories'
+            'DuckAssistantBundle:categories:index.html.twig'
         );
     }
 
@@ -21,8 +29,7 @@ class CategoryController extends BaseController
         return $this->BaseAdd(
             $request,
             'DuckAssistantBundle:categories:form.html.twig',
-            'duck_assistantBundle_cat_Lists',
-            'CATEGORY'
+            'duck_assistantBundle_cat_Lists'
         );
     }
 
@@ -33,8 +40,7 @@ class CategoryController extends BaseController
             $id,
             'DuckAssistantBundle:categories:form.html.twig',
             'duck_assistantBundle_cat_Lists',
-            'DuckAssistantBundle:Category',
-            'CATEGORY'
+            'DuckAssistantBundle:Category'
         );
     }
 
