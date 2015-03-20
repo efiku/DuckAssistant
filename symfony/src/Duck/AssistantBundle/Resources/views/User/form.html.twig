@@ -3,10 +3,24 @@
 {% block title %}DuckAssistantBundle:User:add{% endblock %}
 
 {% block body %}
-<h1>Welcome to the User:add page</h1>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit">Send data!</button>
-    {{ form_end(form) }}
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_label(form.email) }}:
+                {{ form_widget(form.email,{ 'attr': {'class': 'form-control', 'placeholder': 'mail@example.com'} }) }}
+                {{ form_label(form.password) }}:
+                {{ form_widget(form.password,{ 'attr': {'class': 'form-control', 'placeholder': 'Place your password here!'} }) }}
+                {{ form_label(form.name) }}:
+                {{ form_widget(form.name,{ 'attr': {'class': 'form-control', 'placeholder': 'Place your name here!'} }) }}
+                <br>
+                <button type="submit" class="form-control">Send!</button>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

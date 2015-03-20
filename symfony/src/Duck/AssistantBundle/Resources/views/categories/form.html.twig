@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_label(form.name) }}:
+                {{ form_widget(form.name,{ 'attr': {'class': 'form-control', 'placeholder': 'Place your category name here!'} }) }}
+                {{ form_row(form.color,{ 'attr': {'class': 'form-control'} }) }}
+                {{ form_row(form.CreatedBy,{ 'attr': {'class': 'form-control'} }) }}
+                <br>
+                <button type="submit" class="form-control">Send!</button>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

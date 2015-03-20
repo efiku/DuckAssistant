@@ -12,12 +12,22 @@ class TaskType extends AbstractType
         $builder
 
             ->add('content', 'text')
-            ->add('date', 'date')
-            ->add('dueDate', 'date')
+            ->add('date', 'date', array(
+                'widget' => 'single_text'
+            ))
+
+            ->add('dueDate', 'date', array(
+                'widget' => 'single_text'
+            ))
+
             ->add('done','checkbox', array(
                 'required' => false
             ))
-            ->add('createAt','datetime')
+            ->add('createAt','datetime', array(
+                'widget' => 'single_text',
+                'time_widget' => "single_text"
+            ))
+
             ->add('priority',  'choice',
                 array('choices' => array(
                     '0' => 'low',
