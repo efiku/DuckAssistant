@@ -18,5 +18,9 @@ login_action:
     path:     /login
     defaults: { _controller: DuckAssistantBundle:Login:login }
 
+login_check:
+    path:     /login_check
+    defaults: { _controller: DuckAssistantBundle:Login:loginCheck }
+
 logout:
   path:     /logout
