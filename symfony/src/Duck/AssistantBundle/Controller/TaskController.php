@@ -27,20 +27,11 @@ class TaskController extends BaseController
 
     public function addAction(Request $request )
     {
-        $form = $this->createForm($this->createFormType(),$this->createNewItem() );
-
-        if($form->handleRequest($request)->isValid())
-        {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($form->getData());
-            $entityManager->flush();
-
-            return $this->redirectToRoute('duck_assistantBundle_task_Lists');
-        }
-
-        return $this->render('DuckAssistantBundle:tasks:form.html.twig', array(
-            'form' => $form->createView()
-        ));
+        return $this->BaseAdd(
+            $request,
+            'DuckAssistantBundle:tasks:form.html.twig',
+            'duck_assistantBundle_task_Lists'
+        );
     }
 
     public function editAction(Request $request, $id)
@@ -63,7 +54,10 @@ class TaskController extends BaseController
             'DuckAssistantBundle:Task'
         );
     }
+
 }
+
+//TODO: This dragon is so dangerous, we must kill it , adding services and listeners :>
 
 
 
