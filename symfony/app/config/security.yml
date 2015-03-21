@@ -11,10 +11,7 @@ security:
         default:
             anonymous: ~
 
-         main:
-            form_login:
-
-                      use_referer:        true
+       
         secured_area:
                      logout:
                          path:   /logout
