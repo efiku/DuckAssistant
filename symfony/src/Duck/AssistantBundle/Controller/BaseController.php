@@ -58,16 +58,14 @@ abstract class BaseController  extends  Controller{
      * @throws \Exception
      */
     public function BaseAdd( Request $request, $template_to_render, $route){
-        $type[0] = $this->createFormType();
-        $type[1] = $this->createNewItem() ;
-
-        $form = $this->createForm($type[0],$type[1] );
+        $form = $this->createForm($this->createFormType(),$this->createNewItem() );
 
         if($form->handleRequest($request)->isValid())
         {
-            $enMen = $this->getDoctrine()->getManager();
-            $enMen->persist($type[1]);
-            $enMen->flush();
+            $entity = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($entity);
+            $entityManager->flush();
 
             return $this->redirectToRoute($route);
         }
