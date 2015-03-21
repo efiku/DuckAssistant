@@ -11,11 +11,6 @@ security:
         default:
             anonymous: ~
 
-       
-        secured_area:
-                     logout:
-                         path:   /logout
-                         target: /
 
 
     encoders:
