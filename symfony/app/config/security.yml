@@ -10,3 +10,30 @@ security:
 
         default:
             anonymous: ~
+
+         main:
+            form_login:
+
+                      use_referer:        true
+        secured_area:
+                     logout:
+                         path:   /logout
+                         target: /
+
+
+    encoders:
+            Symfony\Component\Security\Core\User\User: plaintext
+
+    providers:
+            in_memory:
+                memory:
+                    users:
+                        efik:
+                            password: efik
+                            roles: 'ROLE_USER'
+                        ucze:
+                            password: ucze
+                            roles: 'ROLE_USER'
+                        admin:
+                            password: admin
+                            roles: 'ROLE_ADMIN'
