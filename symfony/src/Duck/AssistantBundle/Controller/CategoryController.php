@@ -20,9 +20,8 @@ class CategoryController extends BaseController
     public function indexAction()
     {
 
-        $list = new ListProvider($this->getDoctrine()->getManager(), $this->get('security.token_storage'));
         return $this->render('DuckAssistantBundle:categories:index.html.twig', array(
-            'list'  => $list->getProviderLists('DuckAssistantBundle:Category')
+            'list'  => $this->get('duck_assistantbundle.lists.listprovider')->getProviderLists('DuckAssistantBundle:Category')
         ));
     }
 
