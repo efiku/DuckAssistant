@@ -13,3 +13,8 @@ duck_assistant_users:
 duck_assistant_tasks:
     resource: "@DuckAssistantBundle/Resources/config/task.yml"
     prefix:   /task
+
+login_action:
+    path:     /login
+    defaults: { _controller: DuckAssistantBundle:Login:login }
+
