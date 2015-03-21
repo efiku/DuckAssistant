@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
-
+use Doctrine\Common\Persistence;
 
 /**
  * Class BaseController
@@ -40,10 +40,9 @@ abstract class BaseController  extends  Controller{
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function BaseList( $repository , $template_to_render){
-        $enMan = $this->getDoctrine()->getManager();
-        $repo = $enMan->getRepository($repository);
-        $entities = $repo->findAll();
-
+        $entitleManager = $this->getDoctrine()->getManager();
+        $repo = $entitleManager->getRepository($repository);
+        $entities = $repo->findall();
         return $this->render($template_to_render, array(
            'list'  => $entities
         ));

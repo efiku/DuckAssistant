@@ -4,6 +4,7 @@ namespace  Duck\AssistantBundle\Controller;
 
 use Duck\AssistantBundle\Entity\Category;
 use Duck\AssistantBundle\Form\CategoryType;
+use Duck\AssistantBundle\lists\ListProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends BaseController
@@ -18,10 +19,11 @@ class CategoryController extends BaseController
 
     public function indexAction()
     {
-        return $this->BaseList(
-            'DuckAssistantBundle:Category',
-            'DuckAssistantBundle:categories:index.html.twig'
-        );
+
+        $list = new ListProvider($this->getDoctrine()->getManager(), $this->get('security.token_storage'));
+        return $this->render('DuckAssistantBundle:categories:index.html.twig', array(
+            'list'  => $list->getProviderLists('DuckAssistantBundle:Category')
+        ));
     }
 
     public function addAction(Request $request )
