@@ -34,10 +34,6 @@ class TaskType extends AbstractType
                     '1' => 'normal',
                     '2' => 'high')
                 ))
-            ->add('createdBy' , 'entity', array(
-                'class' => 'DuckAssistantBundle:User',
-                'property' => 'name',
-            ))
             ->add('assignee','entity', array(
                 'class' => 'DuckAssistantBundle:User',
                 'property' => 'name',

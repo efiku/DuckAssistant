@@ -63,6 +63,8 @@ abstract class BaseController  extends  Controller{
         if($form->handleRequest($request)->isValid())
         {
             $entity = $form->getData();
+            $entity->setCreatedBy($this->getUser());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($entity);
             $entityManager->flush();

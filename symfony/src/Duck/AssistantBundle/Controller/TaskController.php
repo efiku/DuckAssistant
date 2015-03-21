@@ -27,11 +27,20 @@ class TaskController extends BaseController
 
     public function addAction(Request $request )
     {
-        return $this->BaseAdd(
-            $request,
-            'DuckAssistantBundle:tasks:form.html.twig',
-            'duck_assistantBundle_task_Lists'
-        );
+        $form = $this->createForm($this->createFormType(),$this->createNewItem() );
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($form->getData());
+            $entityManager->flush();
+
+            return $this->redirectToRoute('duck_assistantBundle_task_Lists');
+        }
+
+        return $this->render('DuckAssistantBundle:tasks:form.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     public function editAction(Request $request, $id)

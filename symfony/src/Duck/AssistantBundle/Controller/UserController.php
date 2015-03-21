@@ -27,11 +27,21 @@ class UserController extends BaseController
 
     public function addAction(Request $request )
     {
-        return $this->BaseAdd(
-            $request,
-            'DuckAssistantBundle:User:form.html.twig',
-            'duck_assistantBundle_user_index'
-        );
+        $form = $this->createForm($this->createFormType(),$this->createNewItem() );
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($form->getData());
+            $entityManager->flush();
+
+            return $this->redirectToRoute('duck_assistantBundle_user_index');
+        }
+
+        return $this->render('DuckAssistantBundle:User:form.html.twig', array(
+            'form' => $form->createView()
+        ));
+
     }
 
     public function editAction(Request $request, $id)

@@ -21,11 +21,8 @@ class CategoryType extends AbstractType
                             'black' => 'black',
                             'red' => 'red',
                             'green' => 'green')
-                ))
-            ->add('CreatedBy', 'entity' , array(
-                'class' => 'DuckAssistantBundle:User',
-                'property' => 'name',
-            ));
+                ));
+
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
