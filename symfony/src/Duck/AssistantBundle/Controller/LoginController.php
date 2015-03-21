@@ -3,7 +3,6 @@
 namespace Duck\AssistantBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Request;
 
 class LoginController extends Controller
 {
