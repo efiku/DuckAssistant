@@ -18,6 +18,7 @@ set mainMenu = [
 {'path': 'duck_assistantBundle_cat_Lists', 'name':'Kategorie' },
 {'path': 'duck_assistantBundle_task_Lists', 'name':'Zadania' },
 {'path': 'duck_assistantBundle_user_index', 'name':'Użytkownicy' }
+
 ]
 %}
 <nav class="navbar navbar-inverse navbar-static-top">
@@ -36,6 +37,13 @@ set mainMenu = [
                 {%  for item in mainMenu %}
                     <li><a href="{{ path(item['path']) }}">{{ item['name'] }}</a></li>
                 {% endfor %}
+
+                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('logout')}}">Logout</a></li>
+                {% endif %}
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li><a href="{{ path('login_action')}}">Login</a></li>
+                {% endif %}
             </ul>
         </div><!--/.nav-collapse -->
     </div>

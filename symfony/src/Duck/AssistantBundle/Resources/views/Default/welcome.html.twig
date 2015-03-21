@@ -1,7 +1,9 @@
 {% extends 'DuckAssistantBundle::base.html.twig' %}
 
 {% block body %}
-    <h1>Witaj użytkowniku!</h1>
+    <h1>Witaj {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{{ app.user.username }}
+        {% endif %}</h1>
     <h2>Nasz Duck Assistant jest wciąż w fazie developerskiej ;/</h2>
     <h3>A oto nasz progress :) </h3>
     <div class="progress progress-striped">
