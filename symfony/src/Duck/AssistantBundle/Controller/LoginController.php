@@ -7,7 +7,7 @@ use Symfony\Component\BrowserKit\Request;
 
 class LoginController extends Controller
 {
-    public function loginAction( Request $request)
+    public function loginAction()
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
