@@ -3,10 +3,11 @@
 namespace Duck\AssistantBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Request;
 
 class LoginController extends Controller
 {
-    public function loginAction()
+    public function loginAction( Request $request)
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
