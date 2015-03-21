@@ -2,7 +2,10 @@
 {% block title %}Zadania{% endblock %}
 {% block body %}
 <h1>Lista Zadań
-    <a href="{{ path('duck_assistantBundle_task_add') }}"><button class="btn btn-primary">Dodaj Zadanie</button></a>
+    {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('duck_assistantBundle_task_add') }}"><button class="btn btn-primary">Dodaj Zadanie</button></a>
+    {% endif %}
+
 </h1>
 <div class="col-md-12">
 
@@ -17,7 +20,9 @@
         <th>Utworzone Przez</th>
         <th>Przypisane do</th>
         <th>Kategoria</th>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <th>Akcja:</th>
+        {% endif %}
     </thead>
 
 
@@ -32,10 +37,13 @@
         <td>{{ Task.createdBy.name  }}</td>
         <td>{{ Task.assignee ? Task.assignee.name  }}</td>
         <td>{{ Task.category.name }}</td>
-        <td>
-            <a class="label label-primary" href="{{ path('duck_assistantBundle_task_edit', {'id': Task.id }) }}">Edytuj</a> &nbsp;
-            <a class="label label-danger" href="{{ path('duck_assistantBundle_task_delete', {'id':  Task.id }) }}">Usuń</a>
-        </td>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <td>
+                <a class="label label-primary" href="{{ path('duck_assistantBundle_task_edit', {'id': Task.id }) }}">Edytuj</a> &nbsp;
+                <a class="label label-danger" href="{{ path('duck_assistantBundle_task_delete', {'id':  Task.id }) }}">Usuń</a>
+            </td>
+               {% endif %}
+
     </tr>
 {% endfor %}
 </table>
