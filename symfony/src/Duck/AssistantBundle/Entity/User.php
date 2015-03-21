@@ -290,6 +290,16 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->name;
+    }
+
+    /**
      * @inheritDoc
      */
     public function getRoles()

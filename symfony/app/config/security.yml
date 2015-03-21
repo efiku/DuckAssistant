@@ -7,7 +7,7 @@ security:
 
         default:
             anonymous: ~
-            provider: in_memory
+            provider: administrators
             form_login:
                   login_path: /login
                   check_path: /login_check
@@ -17,8 +17,13 @@ security:
 
     encoders:
             Symfony\Component\Security\Core\User\User: plaintext
+            Duck\AssistantBundle\Entity\User: plaintext
 
     providers:
+            administrators:
+                entity:
+                    class: DuckAssistantBundle:User
+                    property: name
             in_memory:
                 memory:
                     users:
