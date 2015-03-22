@@ -17,3 +17,4 @@ duck_assistantBundle_cat_edit:
 duck_assistantBundle_cat_delete:
     path:     /del/{id}
     defaults: { _controller: DuckAssistantBundle:Category:delete }
+    methods:  [POST]

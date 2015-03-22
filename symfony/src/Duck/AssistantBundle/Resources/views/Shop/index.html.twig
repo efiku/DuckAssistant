@@ -27,7 +27,7 @@
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <td>
                 <a class="label label-primary" href="{{ path('duck_assistantBundle_Shop_edit', {'id': Shops.id }) }}">Edytuj</a> &nbsp;
-                <a class="label label-danger" href="{{ path('duck_assistantBundle_Shop_del', {'id':  Shops.id }) }}">Usuń</a>
+                <form action="{{ path('duck_assistantBundle_Shop_del', {'id':  Shops.id }) }}" method="post"> <button type="submit" class="label label-primary"> Usuń </button></form>
             </td>
                {% endif %}
 

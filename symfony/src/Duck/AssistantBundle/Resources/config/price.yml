@@ -13,7 +13,7 @@ duck_assistantBundle_Price_add:
 duck_assistantBundle_Price_del:
     path:     /del/{id}
     defaults: { _controller: DuckAssistantBundle:Price:delete }
-
+    methods:  [POST]
 duck_assistantBundle_Price_edit:
     path:     /edit/{id}
     defaults: { _controller: DuckAssistantBundle:Price:edit }

@@ -13,7 +13,7 @@ duck_assistantBundle_Shop_add:
 duck_assistantBundle_Shop_del:
     path:     /del/{id}
     defaults: { _controller: DuckAssistantBundle:Shops:del }
-
+    methods:  [POST]
 duck_assistantBundle_Shop_edit:
     path:     /edit/{id}
     defaults: { _controller: DuckAssistantBundle:Shops:edit }

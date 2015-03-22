@@ -76,7 +76,7 @@ class TaskController extends Controller implements  ContrInterfaces
         $this->getDoctrimeManager()->remove($task);
         $this->getDoctrimeManager()->flush();
 
-        return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
+        return $this->redirectToRoute('duck_assistantBundle_task_Lists');
     }
 
 }

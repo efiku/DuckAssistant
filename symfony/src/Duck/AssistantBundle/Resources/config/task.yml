@@ -17,3 +17,4 @@ duck_assistantBundle_task_edit:
 duck_assistantBundle_task_delete:
     path:     /del/{id}
     defaults: { _controller: DuckAssistantBundle:Task:del }
+    methods:  [POST]
