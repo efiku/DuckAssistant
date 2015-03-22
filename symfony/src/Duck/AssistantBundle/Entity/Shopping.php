@@ -27,7 +27,42 @@ class Shopping
      */
     protected $createdAt;
 
-   
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", inversedBy="shopping")
+     * @ORM\JoinTable(name="product_shopping")
+     **/
+    private $products;
+
+
+    public function __construct() {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = new \DateTime();
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Shopping
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
     /**
      * Get createdAt
      *
