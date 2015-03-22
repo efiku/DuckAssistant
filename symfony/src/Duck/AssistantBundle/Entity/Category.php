@@ -39,7 +39,7 @@ class Category implements EntityAuthorInterface
      */
     protected $createdBy;
     /**
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="category", cascade={ "persist","remove" } )
      */
     protected $tasks;
 
