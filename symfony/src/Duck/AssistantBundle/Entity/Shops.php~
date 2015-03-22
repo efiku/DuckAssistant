@@ -32,4 +32,77 @@ class Shops {
     protected $assignee_shop;
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->assignee_shop = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Shops
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add assignee_shop
+     *
+     * @param \Duck\AssistantBundle\Entity\Price $assigneeShop
+     * @return Shops
+     */
+    public function addAssigneeShop(\Duck\AssistantBundle\Entity\Price $assigneeShop)
+    {
+        $this->assignee_shop[] = $assigneeShop;
+
+        return $this;
+    }
+
+    /**
+     * Remove assignee_shop
+     *
+     * @param \Duck\AssistantBundle\Entity\Price $assigneeShop
+     */
+    public function removeAssigneeShop(\Duck\AssistantBundle\Entity\Price $assigneeShop)
+    {
+        $this->assignee_shop->removeElement($assigneeShop);
+    }
+
+    /**
+     * Get assignee_shop
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAssigneeShop()
+    {
+        return $this->assignee_shop;
+    }
 }

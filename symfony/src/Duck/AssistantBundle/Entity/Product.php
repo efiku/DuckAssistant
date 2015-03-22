@@ -33,6 +33,12 @@ class Product {
      */
     protected $assignee_product;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Shopping", mappedBy="products")
+     **/
+    private $shopping;
+
+
 
 
     /**
@@ -41,6 +47,7 @@ class Product {
     public function __construct()
     {
         $this->assignee_product = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->shopping = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -107,5 +114,38 @@ class Product {
     public function getAssigneeProduct()
     {
         return $this->assignee_product;
+    }
+
+    /**
+     * Add shopping
+     *
+     * @param \Duck\AssistantBundle\Entity\Shopping $shopping
+     * @return Product
+     */
+    public function addShopping(\Duck\AssistantBundle\Entity\Shopping $shopping)
+    {
+        $this->shopping[] = $shopping;
+
+        return $this;
+    }
+
+    /**
+     * Remove shopping
+     *
+     * @param \Duck\AssistantBundle\Entity\Shopping $shopping
+     */
+    public function removeShopping(\Duck\AssistantBundle\Entity\Shopping $shopping)
+    {
+        $this->shopping->removeElement($shopping);
+    }
+
+    /**
+     * Get shopping
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getShopping()
+    {
+        return $this->shopping;
     }
 }
