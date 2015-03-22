@@ -33,4 +33,8 @@ class ListProvider {
         }
         return $repo->findAll();
     }
+    public function getProvidersAll( $repo ){
+        $repo =  $this->entityManager->getRepository($repo);
+        return $repo->findAll();
+    }
 }

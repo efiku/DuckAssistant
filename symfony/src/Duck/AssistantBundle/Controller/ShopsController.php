@@ -25,7 +25,7 @@ class ShopsController extends  Controller implements ContrInterfaces
     public function indexAction()
     {
         return $this->render( 'DuckAssistantBundle:Shop:index.html.twig',  array(
-            'list' =>  $this->get('duck_assistantbundle.lists.listprovider')->getProviderLists('DuckAssistantBundle:Shops')
+            'list' =>  $this->get('duck_assistantbundle.lists.listprovider')->getProvidersAll('DuckAssistantBundle:Shops')
         ));
     }
 
