@@ -3,10 +3,12 @@
 namespace Duck\AssistantBundle\Controller;
 
 use Duck\AssistantBundle\Form\ShopsType;
+use Duck\AssistantBundle\Interfaces\ContrInterfaces;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Duck\AssistantBundle\Entity\Shops;
 
-class ShopsController extends BaseController
+class ShopsController extends  Controller implements ContrInterfaces
 {
 
     public function createNewItem(){
@@ -17,42 +19,60 @@ class ShopsController extends BaseController
         return new ShopsType();
     }
 
+    public function getDoctrimeManager(){
+        return $this->getDoctrine()->getManager();
+    }
     public function indexAction()
     {
-        return $this->BaseList(
-            'DuckAssistantBundle:Shops',
-            'DuckAssistantBundle:Shop:index.html.twig'
-        );
+        return $this->render( 'DuckAssistantBundle:Shop:index.html.twig',  array(
+            'list' =>  $this->get('duck_assistantbundle.lists.listprovider')->getProviderLists('DuckAssistantBundle:Shops')
+        ));
     }
 
     public function addAction(Request $request )
     {
-        return $this->BaseAdd(
-            $request,
-            'DuckAssistantBundle:Shop:form.html.twig',
-            'duck_assistantBundle_Shop_index'
-        );
+        $form = $this->createForm($this->createFormType(),$this->createNewItem() );
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $entity = $form->getData();
+            $this->getDoctrimeManager()->persist($entity);
+            $this->getDoctrimeManager()->flush();
+
+            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
+        }
+
+        return $this->render( 'DuckAssistantBundle:categories:form.html.twig' , array(
+            'form' => $form->createView()
+        ));
     }
 
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, Shops $shops)
     {
-        return  $this->BaseEdit(
-            $request,
-            $id,
-            'DuckAssistantBundle:Shop:form.html.twig',
-            'duck_assistantBundle_Shop_index',
-            'DuckAssistantBundle:Shops'
-        );
+        $form = $this->createForm( $this->createFormType(), $shops);
+
+        if($form->handleRequest($request)->isValid()){
+
+            $this->getDoctrimeManager()->flush();
+            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
+        }
+
+        return $this->render('DuckAssistantBundle:Shop:form.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
-    public function delAction($id)
+    public function delAction( Shops $shops)
     {
-        return $this->BaseDelete(
-            $id,
-            'Shop not found in database',
-            'duck_assistantBundle_Shop_index',
-            'DuckAssistantBundle:Shops'
-        );
+        if( null == $shops){
+            throw $this->createNotFoundException();
+        }
+
+        $this->getDoctrimeManager()->remove($shops);
+        $this->getDoctrimeManager()->flush();
+
+        return $this->redirectToRoute('duck_assistantBundle_Shop_index');
     }
+
 
 }
