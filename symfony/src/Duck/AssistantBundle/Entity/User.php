@@ -4,7 +4,7 @@ namespace  Duck\AssistantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
 * @ORM\Entity
 * @ORM\Table(name="User")
@@ -20,16 +20,19 @@ class User implements UserInterface, \Serializable
 
     /**
     * @ORM\Column(type="string", length=100)
+    * @Assert\NotBlank()
     */
     protected $email;
 
     /**
     * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank()
     */
     protected $password;
 
     /**
     * @ORM\Column(type="string", length=100)
+    * @Assert\NotBlank()
     */
     protected $name;
 

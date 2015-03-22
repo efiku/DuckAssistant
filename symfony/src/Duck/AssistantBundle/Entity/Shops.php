@@ -9,7 +9,7 @@
 namespace Duck\AssistantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="Shops")
@@ -24,6 +24,7 @@ class Shops {
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     protected $name;
     /**

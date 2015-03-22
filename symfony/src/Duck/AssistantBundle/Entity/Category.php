@@ -4,6 +4,7 @@ namespace Duck\AssistantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Duck\AssistantBundle\Interfaces\EntityAuthorInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity
@@ -20,11 +21,13 @@ class Category implements EntityAuthorInterface
 
     /**
     * @ORM\Column(type="string", length=100)
+    * @Assert\NotBlank()
     */
     protected $name;
 
     /**
     * @ORM\Column(type="string", length=20)
+    * @Assert\NotBlank()
     */
     protected $color;
 

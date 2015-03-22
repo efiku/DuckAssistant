@@ -3,7 +3,7 @@ namespace  Duck\AssistantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Duck\AssistantBundle\Interfaces\EntityAuthorInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
 * @ORM\Entity
 * @ORM\Table(name="Task")
@@ -19,16 +19,19 @@ class Task  implements EntityAuthorInterface
 
     /**
     * @ORM\Column(type="string")
+    * @Assert\NotBlank()
     */
     protected $content;
 
     /**
     * @ORM\Column(type="date")
+    * @Assert\NotBlank()
     */
     protected $date;
 
     /**
     * @ORM\Column(type="date")
+     * @Assert\NotBlank()
     */
     protected $dueDate;
 
