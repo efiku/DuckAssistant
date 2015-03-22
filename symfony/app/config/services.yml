@@ -10,3 +10,10 @@ services:
   duck_assistantbundle.lists.listprovider:
       class: Duck\AssistantBundle\lists\ListProvider
       arguments: [ @doctrine.orm.default_entity_manager, @security.token_storage ]
+
+  doctrine.user_listener:
+    class: Duck\AssistantBundle\EventListener\EntityAuthor
+    tags:
+      - { name: doctrine.event_listener, event: prePersist }
+    arguments:
+      - "@security.token_storage"

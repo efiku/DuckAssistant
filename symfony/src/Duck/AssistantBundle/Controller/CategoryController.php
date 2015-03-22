@@ -4,10 +4,11 @@ namespace  Duck\AssistantBundle\Controller;
 
 use Duck\AssistantBundle\Entity\Category;
 use Duck\AssistantBundle\Form\CategoryType;
-use Duck\AssistantBundle\lists\ListProvider;
+use Duck\AssistantBundle\Interfaces\ContrInterfaces;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class CategoryController extends BaseController
+class CategoryController extends Controller implements  ContrInterfaces
 {
     public function createNewItem(){
         return new Category();
@@ -17,9 +18,13 @@ class CategoryController extends BaseController
         return new CategoryType();
     }
 
+    public function getDoctrimeManager(){
+        return $this->getDoctrine()->getManager();
+    }
+
+
     public function indexAction()
     {
-
         return $this->render('DuckAssistantBundle:categories:index.html.twig', array(
             'list'  => $this->get('duck_assistantbundle.lists.listprovider')->getProviderLists('DuckAssistantBundle:Category')
         ));
@@ -27,31 +32,46 @@ class CategoryController extends BaseController
 
     public function addAction(Request $request )
     {
-        return $this->BaseAdd(
-            $request,
-            'DuckAssistantBundle:categories:form.html.twig',
-            'duck_assistantBundle_cat_Lists'
-        );
+        $form = $this->createForm($this->createFormType(),$this->createNewItem() );
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $entity = $form->getData();
+            $this->getDoctrimeManager()->persist($entity);
+            $this->getDoctrimeManager()->flush();
+
+            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
+        }
+
+        return $this->render( 'DuckAssistantBundle:categories:form.html.twig' , array(
+            'form' => $form->createView()
+        ));
     }
 
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, Category $category)
     {
-        return  $this->BaseEdit(
-            $request,
-            $id,
-            'DuckAssistantBundle:categories:form.html.twig',
-            'duck_assistantBundle_cat_Lists',
-            'DuckAssistantBundle:Category'
-        );
+        $form = $this->createForm( $this->createFormType(), $category);
+
+        if($form->handleRequest($request)->isValid()){
+
+            $this->getDoctrimeManager()->flush();
+            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
+        }
+
+        return $this->render('DuckAssistantBundle:categories:form.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
-    public function deleteAction($id)
+    public function deleteAction(Category $category)
     {
-        return $this->BaseDelete(
-            $id,
-            'Category not found in database',
-            'duck_assistantBundle_cat_Lists',
-            'DuckAssistantBundle:Category'
-        );
+        if( null == $category){
+            throw $this->createNotFoundException();
+        }
+
+        $this->getDoctrimeManager()->remove($category);
+        $this->getDoctrimeManager()->flush();
+
+        return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
     }
 }

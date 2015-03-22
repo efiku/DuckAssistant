@@ -3,10 +3,13 @@
 namespace Duck\AssistantBundle\Controller;
 
 use Duck\AssistantBundle\Form\UserType;
+use Duck\AssistantBundle\Interfaces\ContrInterfaces;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Duck\AssistantBundle\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class UserController extends BaseController
+class UserController extends Controller implements  ContrInterfaces
 {
 
     public function createNewItem(){
@@ -17,12 +20,22 @@ class UserController extends BaseController
         return new UserType();
     }
 
+    public function getDoctrimeManager(){
+        return $this->getDoctrine()->getManager();
+    }
+
+    public function getDoctrimeRepository($repository) {
+        return $this->getDoctrine()->getRepository($repository);
+    }
+
     public function indexAction()
     {
-        return $this->BaseList(
-            'DuckAssistantBundle:User',
-            'DuckAssistantBundle:User:index.html.twig'
-        );
+        $repository = $this->getDoctrimeRepository('DuckAssistantBundle:User');
+
+        return $this->render('DuckAssistantBundle:User:index.html.twig',  array(
+        'list' => $repository->findAll()
+        ));
+
     }
 
     public function addAction(Request $request )
@@ -31,38 +44,44 @@ class UserController extends BaseController
 
         if($form->handleRequest($request)->isValid())
         {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($form->getData());
-            $entityManager->flush();
+            $entity = $form->getData();
 
+            $this->getDoctrimeManager()->persist($entity);
+            $this->getDoctrimeManager()->flush();
+
+            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
+        }
+
+        return $this->render( 'DuckAssistantBundle:User:form.html.twig' , array(
+            'form' => $form->createView()
+        ));
+    }
+
+    public function editAction(Request $request, User $user)
+    {
+        $form = $this->createForm( $this->createFormType(), $user);
+
+        if($form->handleRequest($request)->isValid()){
+            $this->getDoctrimeManager()->flush();
             return $this->redirectToRoute('duck_assistantBundle_user_index');
         }
 
         return $this->render('DuckAssistantBundle:User:form.html.twig', array(
             'form' => $form->createView()
         ));
-
     }
 
-    public function editAction(Request $request, $id)
-    {
-        return  $this->BaseEdit(
-            $request,
-            $id,
-            'DuckAssistantBundle:User:form.html.twig',
-            'duck_assistantBundle_user_index',
-            'DuckAssistantBundle:User'
-        );
-    }
 
-    public function delAction($id)
+    public function delAction(User $user)
     {
-        return $this->BaseDelete(
-            $id,
-            'User not found in database',
-            'duck_assistantBundle_user_index',
-            'DuckAssistantBundle:User'
-        );
+        if( null == $user){
+            throw $this->createNotFoundException();
+        }
+
+        $this->getDoctrimeManager()->remove($user);
+        $this->getDoctrimeManager()->flush();
+
+        return $this->redirectToRoute('duck_assistantBundle_user_index');
     }
 
 }
