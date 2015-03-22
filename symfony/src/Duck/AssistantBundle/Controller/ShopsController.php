@@ -42,7 +42,7 @@ class ShopsController extends  Controller implements ContrInterfaces
             return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
         }
 
-        return $this->render( 'DuckAssistantBundle:categories:form.html.twig' , array(
+        return $this->render( 'DuckAssistantBundle:Shop:index.html.twig' , array(
             'form' => $form->createView()
         ));
     }
