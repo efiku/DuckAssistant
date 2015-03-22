@@ -39,9 +39,11 @@
         <td>{{ Task.category ? Task.category.name }}</td>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <td>
-                <a class="label label-primary" href="{{ path('duck_assistantBundle_task_edit', {'id': Task.id }) }}">Edytuj</a> &nbsp;
-                <form action="{{ path('duck_assistantBundle_task_delete', {'id':  Task.id }) }}" method="post"> <button type="submit" class="label label-primary"> Usuń </button></form>
-            </td>
+                <a  href="{{ path('duck_assistantBundle_task_edit', {'id': Task.id }) }}"><button  class="btn btn-xs btn-success">Edytuj</button></a>
+                <form action="{{ path('duck_assistantBundle_task_delete', {'id':  Task.id }) }}" method="post">
+                    <button type="submit" class="btn btn-xs btn-danger"> Usuń </button>
+                </form>
+           </td>
                {% endif %}
 
     </tr>

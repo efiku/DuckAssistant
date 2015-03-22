@@ -30,9 +30,11 @@
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <td>
-                <a class="label label-primary" href="{{ path('duck_assistantBundle_Price_edit', {'id': Price.id }) }}">Edytuj</a> &nbsp;
-                <form action="{{ path('duck_assistantBundle_Price_del', {'id':  Price.id }) }}" method="post"> <button type="submit" class="label label-primary"> Usuń </button></form>
-            </td>
+                <a  href="{{ path('duck_assistantBundle_Price_edit', {'id': Price.id }) }}"><button type="button" class="btn btn-xs btn-success">Edytuj</button></a>
+                <form action="{{ path('duck_assistantBundle_Price_del', {'id':  Price.id }) }}" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger"> Usuń </button>
+                </form>
+           </td>
                {% endif %}
 
     </tr>

@@ -26,8 +26,10 @@
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <td>
-                <a class="label label-primary" href="{{ path('duck_assistantBundle_Shop_edit', {'id': Shops.id }) }}">Edytuj</a> &nbsp;
-                <form action="{{ path('duck_assistantBundle_Shop_del', {'id':  Shops.id }) }}" method="post"> <button type="submit" class="label label-primary"> Usuń </button></form>
+                <a  href="{{ path('duck_assistantBundle_Shop_edit', {'id': Shops.id }) }}"><button type="button" class="btn btn-xs btn-success">Edytuj</button></a>
+                <form action="{{ path('duck_assistantBundle_Shop_del', {'id':  Shops.id }) }}" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger"> Usuń </button>
+                </form>
             </td>
                {% endif %}
 
