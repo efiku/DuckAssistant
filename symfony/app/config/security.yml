@@ -45,10 +45,3 @@ security:
                 entity:
                     class: DuckAssistantBundle:User
                     property: name
-            in_memory:
-                memory:
-                    users:
-
-                        admin:
-                            password: admin
-                            roles: 'ROLE_ADMIN'
