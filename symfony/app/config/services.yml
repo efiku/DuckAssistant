@@ -14,6 +14,6 @@ services:
   doctrine.user_listener:
     class: Duck\AssistantBundle\EventListener\EntityAuthor
     tags:
-      - { name: doctrine.event_listener, event: prePersist }
+      - { name: doctrine.event_listener, event: prePersist, method: prePersist }
     arguments:
       - "@security.token_storage"

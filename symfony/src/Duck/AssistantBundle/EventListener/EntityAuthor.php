@@ -24,12 +24,14 @@ class EntityAuthor {
 
     public function prePersist(LifecycleEventArgs $args)
     {
+
         $entity = $args->getEntity();
-        $em = $args->getEntityManager();
+        //$em = $args->getEntityManager();
         $token = $this->tokenStorageInterface->getToken();
         if($entity instanceof EntityAuthorInterface) {
             try {
                 if ($token) {
+
                     $entity->setCreatedBy($token->getUser());
                 }
             } catch (Exception $e) {
