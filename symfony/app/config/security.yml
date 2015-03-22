@@ -25,6 +25,15 @@ security:
          - { path: ^/user/add, roles: ROLE_USER }
          - { path: ^/user/edit, roles: ROLE_USER }
          - { path: ^/user/del, roles: ROLE_USER }
+         - { path: ^/product/add, roles: ROLE_USER }
+         - { path: ^/product/edit, roles: ROLE_USER }
+         - { path: ^/product/del, roles: ROLE_USER }
+         - { path: ^/shop/add, roles: ROLE_USER }
+         - { path: ^/shop/edit, roles: ROLE_USER }
+         - { path: ^/shop/del, roles: ROLE_USER }
+         - { path: ^/price/add, roles: ROLE_USER }
+         - { path: ^/price/edit, roles: ROLE_USER }
+         - { path: ^/price/del, roles: ROLE_USER }
 
 
     encoders:
