@@ -1,14 +1,15 @@
 <?php
 
-namespace Duck\AssistantBundle\Controller;
+namespace  Duck\AssistantBundle\Controller;
 
-use Duck\AssistantBundle\Form\ProductType;
-use Symfony\Component\HttpFoundation\Request;
 use Duck\AssistantBundle\Entity\Product;
+use Duck\AssistantBundle\Form\ProductType;
+use Duck\AssistantBundle\Interfaces\ContrInterfaces;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ProductController extends BaseController
+class ProductController extends Controller implements  ContrInterfaces
 {
-
     public function createNewItem(){
         return new Product();
     }
@@ -17,42 +18,60 @@ class ProductController extends BaseController
         return new ProductType();
     }
 
+    public function getDoctrimeManager(){
+        return $this->getDoctrine()->getManager();
+    }
+
+
     public function indexAction()
     {
-        return $this->BaseList(
-            'DuckAssistantBundle:Product',
-            'DuckAssistantBundle:Product:index.html.twig'
-        );
+        return $this->render('DuckAssistantBundle:Product:index.html.twig', array(
+            'list'  => $this->get('duck_assistantbundle.lists.listprovider')->getProviderLists('DuckAssistantBundle:Product')
+        ));
     }
 
     public function addAction(Request $request )
     {
-        return $this->BaseAdd(
-            $request,
-            'DuckAssistantBundle:Product:form.html.twig',
-            'duck_assistantBundle_Product_index'
-        );
+        $form = $this->createForm($this->createFormType(),$this->createNewItem() );
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $entity = $form->getData();
+            $this->getDoctrimeManager()->persist($entity);
+            $this->getDoctrimeManager()->flush();
+
+            return $this->redirectToRoute('duck_assistantBundle_Product_index');
+        }
+
+        return $this->render( 'DuckAssistantBundle:Product:form.html.twig' , array(
+            'form' => $form->createView()
+        ));
     }
 
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, Product $category)
     {
-        return  $this->BaseEdit(
-            $request,
-            $id,
-            'DuckAssistantBundle:Product:form.html.twig',
-            'duck_assistantBundle_Product_index',
-            'DuckAssistantBundle:Product'
-        );
+        $form = $this->createForm( $this->createFormType(), $category);
+
+        if($form->handleRequest($request)->isValid()){
+
+            $this->getDoctrimeManager()->flush();
+            return $this->redirectToRoute('duck_assistantBundle_Product_index');
+        }
+
+        return $this->render('DuckAssistantBundle:Product:form.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
-    public function delAction($id)
+    public function deleteAction(Product $product)
     {
-        return $this->BaseDelete(
-            $id,
-            'Shop not found in database',
-            'duck_assistantBundle_Product_index',
-            'DuckAssistantBundle:Product'
-        );
-    }
+        if( null == $product){
+            throw $this->createNotFoundException();
+        }
 
+        $this->getDoctrimeManager()->remove($product);
+        $this->getDoctrimeManager()->flush();
+
+        return $this->redirectToRoute('duck_assistantBundle_Product_index');
+    }
 }
