@@ -1,0 +1,42 @@
+{% extends 'DuckAssistantBundle::base.html.twig' %}
+{% block title %}Ceny{% endblock %}
+{% block body %}
+<h1>Lista Cen
+    {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('duck_assistantBundle_Price_add') }}"><button class="btn btn-primary">Dodaj Cene</button></a>
+    {% endif %}
+
+</h1>
+<div class="col-md-12">
+
+<table class="table">
+    <thead>
+        <th>#</th>
+        <th>Cena</th>
+        <th>Produkt</th>
+        <th>Sklep</th>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <th>Akcja:</th>
+        {% endif %}
+    </thead>
+
+
+{% for Price in list %}
+    <tr>
+        <td>{{ Price.id }}</td>
+        <td>{{ Price.price}}zł</td>
+        <td>{{ Price.Product ? Price.Product.name  }}</td>
+        <td>{{ Price.Shop ? Price.Shop.name  }}</td>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <td>
+                <a class="label label-primary" href="{{ path('duck_assistantBundle_Price_edit', {'id': Price.id }) }}">Edytuj</a> &nbsp;
+                <a class="label label-danger" href="{{ path('duck_assistantBundle_Price_del', {'id':  Price.id }) }}">Usuń</a>
+            </td>
+               {% endif %}
+
+    </tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}

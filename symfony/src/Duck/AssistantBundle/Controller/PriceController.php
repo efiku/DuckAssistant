@@ -2,20 +2,20 @@
 
 namespace  Duck\AssistantBundle\Controller;
 
-use Duck\AssistantBundle\Entity\Product;
-use Duck\AssistantBundle\Form\ProductType;
+use Duck\AssistantBundle\Entity\Price;
+use Duck\AssistantBundle\Form\PriceType;
 use Duck\AssistantBundle\Interfaces\ContrInterfaces;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ProductController extends Controller implements  ContrInterfaces
+class PriceController extends Controller implements  ContrInterfaces
 {
     public function createNewItem(){
-        return new Product();
+        return new Price();
     }
 
     public function createFormType(){
-        return new ProductType();
+        return new PriceType();
     }
 
     public function getDoctrimeManager(){
@@ -25,8 +25,8 @@ class ProductController extends Controller implements  ContrInterfaces
 
     public function indexAction()
     {
-        return $this->render('DuckAssistantBundle:Product:index.html.twig', array(
-            'list'  => $this->get('duck_assistantbundle.lists.listprovider')->getProvidersAll('DuckAssistantBundle:Product')
+        return $this->render('DuckAssistantBundle:Price:index.html.twig', array(
+            'list'  => $this->get('duck_assistantbundle.lists.listprovider')->getProvidersAll('DuckAssistantBundle:Price')
         ));
     }
 
@@ -40,38 +40,38 @@ class ProductController extends Controller implements  ContrInterfaces
             $this->getDoctrimeManager()->persist($entity);
             $this->getDoctrimeManager()->flush();
 
-            return $this->redirectToRoute('duck_assistantBundle_Product_index');
+            return $this->redirectToRoute('duck_assistantBundle_Price_index');
         }
 
-        return $this->render( 'DuckAssistantBundle:Product:form.html.twig' , array(
+        return $this->render( 'DuckAssistantBundle:Price:form.html.twig' , array(
             'form' => $form->createView()
         ));
     }
 
-    public function editAction(Request $request, Product $product)
+    public function editAction(Request $request, Price $price)
     {
-        $form = $this->createForm( $this->createFormType(), $product);
+        $form = $this->createForm( $this->createFormType(), $price);
 
         if($form->handleRequest($request)->isValid()){
 
             $this->getDoctrimeManager()->flush();
-            return $this->redirectToRoute('duck_assistantBundle_Product_index');
+            return $this->redirectToRoute('duck_assistantBundle_Price_index');
         }
 
-        return $this->render('DuckAssistantBundle:Product:form.html.twig', array(
+        return $this->render('DuckAssistantBundle:Price:form.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
-    public function deleteAction(Product $product)
+    public function deleteAction(Price $price)
     {
-        if( null == $product){
+        if( null == $price){
             throw $this->createNotFoundException();
         }
 
-        $this->getDoctrimeManager()->remove($product);
+        $this->getDoctrimeManager()->remove($price);
         $this->getDoctrimeManager()->flush();
 
-        return $this->redirectToRoute('duck_assistantBundle_Product_index');
+        return $this->redirectToRoute('duck_assistantBundle_Price_index');
     }
 }

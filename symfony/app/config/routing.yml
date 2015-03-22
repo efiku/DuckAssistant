@@ -21,6 +21,10 @@ duck_assistant_Shop:
     resource: "@DuckAssistantBundle/Resources/config/shop.yml"
     prefix:   /shop
 
+duck_assistant_Price:
+    resource: "@DuckAssistantBundle/Resources/config/price.yml"
+    prefix:   /price
+
 login_action:
     path:     /login
     defaults: { _controller: DuckAssistantBundle:Login:login }

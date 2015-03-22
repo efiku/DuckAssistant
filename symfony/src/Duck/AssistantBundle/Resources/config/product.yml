@@ -12,7 +12,7 @@ duck_assistantBundle_Product_add:
 
 duck_assistantBundle_Product_del:
     path:     /del/{id}
-    defaults: { _controller: DuckAssistantBundle:Product:del }
+    defaults: { _controller: DuckAssistantBundle:Product:delete }
 
 duck_assistantBundle_Product_edit:
     path:     /edit/{id}

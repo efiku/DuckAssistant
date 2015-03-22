@@ -34,7 +34,7 @@ class Price {
     protected $shop;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     protected $price;
 
