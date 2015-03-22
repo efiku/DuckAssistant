@@ -2,12 +2,15 @@
 
 namespace  Duck\AssistantBundle\Controller;
 
+use Duck\AssistantBundle\Entity\Category;
 use Duck\AssistantBundle\Form\TaskType;
+use Duck\AssistantBundle\Interfaces\ContrInterfaces;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Duck\AssistantBundle\Entity\Task;
 
 
-class TaskController extends BaseController
+class TaskController extends Controller implements  ContrInterfaces
 {
 
     public function createNewItem(){
@@ -17,47 +20,65 @@ class TaskController extends BaseController
     public function createFormType(){
         return new TaskType();
     }
+
+
+    public function getDoctrimeManager(){
+        return $this->getDoctrine()->getManager();
+    }
+
     public function indexAction()
     {
-        return $this->BaseList(
-            'DuckAssistantBundle:Task',
-            'DuckAssistantBundle:tasks:index.html.twig'
-        );
+        return $this->render('DuckAssistantBundle:tasks:index.html.twig', array(
+            'list'  => $this->get('duck_assistantbundle.lists.listprovider')->getProviderLists('DuckAssistantBundle:Task')
+        ));
     }
 
     public function addAction(Request $request )
     {
-        return $this->BaseAdd(
-            $request,
-            'DuckAssistantBundle:tasks:form.html.twig',
-            'duck_assistantBundle_task_Lists'
-        );
+        $form = $this->createForm($this->createFormType(),$this->createNewItem() );
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $entity = $form->getData();
+
+            $this->getDoctrimeManager()->persist($entity);
+            $this->getDoctrimeManager()->flush();
+
+            return $this->redirectToRoute('duck_assistantBundle_task_Lists');
+        }
+
+        return $this->render( 'DuckAssistantBundle:tasks:form.html.twig' , array(
+            'form' => $form->createView()
+        ));
+
     }
 
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, Task $task)
     {
-        return  $this->BaseEdit(
-            $request,
-            $id,
-            'DuckAssistantBundle:tasks:form.html.twig',
-            'duck_assistantBundle_task_Lists',
-            'DuckAssistantBundle:Task'
-        );
+        $form = $this->createForm( $this->createFormType(), $task);
+
+        if($form->handleRequest($request)->isValid()){
+            $this->getDoctrimeManager()->flush();
+            return $this->redirectToRoute('duck_assistantBundle_task_Lists');
+        }
+
+        return $this->render( 'DuckAssistantBundle:tasks:form.html.twig', array(
+            'form' => $form->createView()
+        ));
+
     }
 
-    public function delAction($id)
+    public function delAction(Task $task)
     {
-        return $this->BaseDelete(
-            $id,
-            'Task not found in database',
-            'duck_assistantBundle_task_Lists',
-            'DuckAssistantBundle:Task'
-        );
+        if( null == $task){
+            throw $this->createNotFoundException();
+        }
+        $this->getDoctrimeManager()->remove($task);
+        $this->getDoctrimeManager()->flush();
+
+        return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
     }
 
 }
-
-//TODO: This dragon is so dangerous, we must kill it , adding services and listeners :>
-
 
 

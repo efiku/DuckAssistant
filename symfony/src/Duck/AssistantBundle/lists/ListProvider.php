@@ -27,6 +27,7 @@ class ListProvider {
 
        $repo =  $this->entityManager->getRepository($repo);
        $token = $this->tokenStorage->getToken();
+
         if( NULL != $token && NULL != $token->getUser()  && 'anon.' != $token->getUser()){
             return $repo->findBy(array( 'createdBy' => $token->getUser()) );
         }

@@ -3,12 +3,13 @@
 namespace Duck\AssistantBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Duck\AssistantBundle\Interfaces\EntityAuthorInterface;
 
-    /**
-    * @ORM\Entity
-    * @ORM\Table(name="Category")
-    */
-    class Category
+/**
+* @ORM\Entity
+* @ORM\Table(name="Category")
+*/
+class Category implements EntityAuthorInterface
     {
     /**
     * @ORM\Column(type="integer")
