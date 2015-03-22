@@ -39,7 +39,7 @@ class ShopsController extends  Controller implements ContrInterfaces
             $this->getDoctrimeManager()->persist($entity);
             $this->getDoctrimeManager()->flush();
 
-            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
+            return $this->redirectToRoute('duck_assistantBundle_Shop_index');
         }
 
         return $this->render( 'DuckAssistantBundle:Shop:index.html.twig' , array(
@@ -54,7 +54,7 @@ class ShopsController extends  Controller implements ContrInterfaces
         if($form->handleRequest($request)->isValid()){
 
             $this->getDoctrimeManager()->flush();
-            return $this->redirectToRoute('duck_assistantBundle_cat_Lists');
+            return $this->redirectToRoute('duck_assistantBundle_Shop_index');
         }
 
         return $this->render('DuckAssistantBundle:Shop:form.html.twig', array(
