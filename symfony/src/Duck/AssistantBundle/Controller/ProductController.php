@@ -26,7 +26,7 @@ class ProductController extends Controller implements  ContrInterfaces
     public function indexAction()
     {
         return $this->render('DuckAssistantBundle:Product:index.html.twig', array(
-            'list'  => $this->get('duck_assistantbundle.lists.listprovider')->getProviderLists('DuckAssistantBundle:Product')
+            'list'  => $this->get('duck_assistantbundle.lists.listprovider')->getProvidersAll('DuckAssistantBundle:Product')
         ));
     }
 
