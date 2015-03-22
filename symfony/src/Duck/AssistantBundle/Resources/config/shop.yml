@@ -1,0 +1,19 @@
+#
+# This file contains all routers for prefix /user
+# e.g. /user/add , /user/edit/{id}
+#
+duck_assistantBundle_Shop_index:
+    path:     /
+    defaults: { _controller: DuckAssistantBundle:Shops:index }
+
+duck_assistantBundle_Shop_add:
+    path:     /add
+    defaults: { _controller: DuckAssistantBundle:Shops:add }
+
+duck_assistantBundle_Shop_del:
+    path:     /del/{id}
+    defaults: { _controller: DuckAssistantBundle:Shops:del }
+
+duck_assistantBundle_Shop_edit:
+    path:     /edit/{id}
+    defaults: { _controller: DuckAssistantBundle:Shops:edit }

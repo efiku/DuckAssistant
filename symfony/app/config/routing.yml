@@ -14,6 +14,13 @@ duck_assistant_tasks:
     resource: "@DuckAssistantBundle/Resources/config/task.yml"
     prefix:   /task
 
+duck_assistant_Product:
+    resource: "@DuckAssistantBundle/Resources/config/product.yml"
+    prefix:   /product
+duck_assistant_Shop:
+    resource: "@DuckAssistantBundle/Resources/config/shop.yml"
+    prefix:   /shop
+
 login_action:
     path:     /login
     defaults: { _controller: DuckAssistantBundle:Login:login }
