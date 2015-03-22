@@ -1,0 +1,38 @@
+{% extends 'DuckAssistantBundle::base.html.twig' %}
+{% block title %}Sklepy{% endblock %}
+{% block body %}
+<h1>Lista Sklepów
+    {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('duck_assistantBundle_Shop_add') }}"><button class="btn btn-primary">Dodaj Sklep</button></a>
+    {% endif %}
+
+</h1>
+<div class="col-md-12">
+
+<table class="table">
+    <thead>
+        <th>#</th>
+        <th>Nazwa</th>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <th>Akcja:</th>
+        {% endif %}
+    </thead>
+
+
+{% for Shop in list %}
+    <tr>
+        <td>{{ Shop.id }}</td>
+        <td>{{ Shop.name}}</td>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <td>
+                <a class="label label-primary" href="{{ path('duck_assistantBundle_Shop_edit', {'id': Shop.id }) }}">Edytuj</a> &nbsp;
+                <a class="label label-danger" href="{{ path('duck_assistantBundle_Shop_del', {'id':  Shop.id }) }}">Usuń</a>
+            </td>
+               {% endif %}
+
+    </tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}

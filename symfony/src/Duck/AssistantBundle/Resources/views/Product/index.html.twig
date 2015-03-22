@@ -1,0 +1,38 @@
+{% extends 'DuckAssistantBundle::base.html.twig' %}
+{% block title %}Produkty{% endblock %}
+{% block body %}
+<h1>Lista Produktów
+    {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('duck_assistantBundle_Product_add') }}"><button class="btn btn-primary">Dodaj Produkt</button></a>
+    {% endif %}
+
+</h1>
+<div class="col-md-12">
+
+<table class="table">
+    <thead>
+        <th>#</th>
+        <th>Nazwa</th>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <th>Akcja:</th>
+        {% endif %}
+    </thead>
+
+
+{% for Product in list %}
+    <tr>
+        <td>{{ Product.id }}</td>
+        <td>{{ Product.name}}</td>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <td>
+                <a class="label label-primary" href="{{ path('duck_assistantBundle_Product_edit', {'id': Product.id }) }}">Edytuj</a> &nbsp;
+                <a class="label label-danger" href="{{ path('duck_assistantBundle_Product_del', {'id':  Product.id }) }}">Usuń</a>
+            </td>
+               {% endif %}
+
+    </tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}

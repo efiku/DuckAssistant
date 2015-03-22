@@ -23,15 +23,13 @@ class Price {
     protected $id;
 
     /**
-     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="assignee_product")
-     * @ORM\JoinColumn(name="assignee_product_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     protected $product;
     /**
-     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="Shops", inversedBy="assignee_shop")
-     * @ORM\JoinColumn(name="assignee_shop_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id")
      */
     protected $shop;
 
