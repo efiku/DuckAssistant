@@ -1,5 +1,6 @@
 ##DuckAssistant
 
+Don't use this :D
 Checkout ours personal Assistant! 
 
 This application helps manage your tasks.
